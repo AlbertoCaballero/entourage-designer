@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+body, html {
+    font-family: 'Montserrat';
+    margin: 0;
+    padding: 0;
+    color: #555555;
+}
+
+h1 {
+    margin: 15px 0 0 20px;
+}
+
+p {
+    margin: 0 0 10px 30px;
+}
+
+.viewbox {
+    width: 90vw;
+    height: 80vh;
+    margin: 0 5vw;
+    padding: 10px;
+    background-color: #dddddd;
+    border-radius: 5px;
+}
+
+.viewbox-container {
+    position: absolute;
+    width: 100vw;
+    text-align: center;
+}

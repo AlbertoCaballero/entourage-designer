@@ -1,0 +1,32 @@
+/*.clip-path {
+
+}
+
+.overlay-2, .overlay-1 {
+
+}*/
+
+.adjust-controlers {
+    width: 90%;
+    bottom: 10px;
+    position: absolute;
+}
+
+#image, #image-top {
+    height: 40vh;
+    width: auto;
+    position: absolute;
+}
+
+#image {
+    z-index: 4;
+}
+
+#image-top {
+    transform: translateX(-100px) translateY(100px) scaleY(0.3) skewX(35deg);
+    z-index: 3;
+}
+
+#range-x, #range-y {
+    width: 250px;
+}
