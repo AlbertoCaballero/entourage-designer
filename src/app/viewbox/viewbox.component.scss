@@ -12,21 +12,24 @@
     position: absolute;
 }
 
-#image, #image-top {
-    height: 40vh;
+#image-top, #shadow {
+    height: 250px;
     width: auto;
     position: absolute;
 }
 
-#image {
+#image-top {
     z-index: 4;
 }
 
-#image-top {
-    transform: translateX(-100px) translateY(100px) scaleY(0.3) skewX(35deg);
+#shadow {
+    //This makes it look like a shadow: 
+    //  transform: skewX(45deg) translateX(-125px) scaleY(0.3) translateY(270px);
+    //  The function: (Height*tan(angle))/2 = translateX
+    transform: skewX(20deg) translateX(-45px);
     z-index: 3;
 }
 
 #range-x, #range-y {
-    width: 250px;
+    width: 40vw;
 }

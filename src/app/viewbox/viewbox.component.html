@@ -1,7 +1,7 @@
 <!--Start top section. Title and description.-->
 <div>
     <h1>Entourage Designer - Demo</h1>
-    <p>Initial proof of concept for the proyect</p>
+    <p>Initial proof of concept for the project</p>
 </div>
 
 <!--Start the container for the viewbox-->
@@ -14,23 +14,22 @@
                    <figure class="overlay-2">
                      <figure class="overlay-1">
                        <img id="image-top" src="https://i.ya-webdesign.com/images/sad-girl-png-6.png">
-                       <img id="image" src="https://i.ya-webdesign.com/images/sad-girl-png-6.png">
+                       <img id="shadow" src="https://i.ya-webdesign.com/images/sad-girl-png-6.png">
                      </figure>
                    </figure>
-                </figure>
-
-            <div id="text-area"><span id="text-1"></span></div>    
+                </figure>   
          </div>
 
          <!--Here the controlers and scrolls-->
          <div class="adjust-controlers">
-             Lightsource X:<br>
-             <input type="range" id="range-x" class="sliders" min="0" max="100">
+             Lightsource X: {{rangex}}<br>
+             <input type="range" id="range-x" class="sliders" min="0" max="100" (input)="rangex=$event.target.value">
 
              <br><br>
 
-             Lightsource Y: {{rangex}}<br>
-             <input type="range" id="range-y" class="sliders" min="0" max="100" ([ngModule])="rangex">
+             Lightsource Y: {{rangey}} <br>
+             <input type="range" id="range-y" class="sliders" min="0" max="100" (input)="rangey=$event.target.value">
+
          </div>
     </div>
 </div>
