@@ -6,10 +6,40 @@
 
 }*/
 
+.image-area {
+    width: 80vw;
+    text-align: center;
+}
+.viewbox {
+    width: 90vw;
+    height: 80vh;
+    margin: 0 5vw 0 5vw;
+    padding: 10px;
+    text-align: center;
+    //background-color: red;
+}
+
+.viewbox-container {
+    width: 100vw;
+    text-align: center;
+}
+
 .adjust-controlers {
     width: 90%;
-    bottom: 10px;
+    bottom: 50px;
     position: absolute;
+}
+
+.text-input {
+    width: 25vw;
+    height: 30px;
+    margin: 20px 0px;
+}
+
+.imgbtn {
+    width: 100px;
+    height: 35px;
+    margin: 20px 5px;
 }
 
 #image-top, #shadow {
@@ -25,8 +55,11 @@
 #shadow {
     //This makes it look like a shadow: 
     //  transform: skewX(45deg) translateX(-125px) scaleY(0.3) translateY(270px);
-    //  The function: (Height*tan(angle))/2 = translateX
-    transform: skewX(20deg) translateX(-45px);
+
+    //The functions: 
+    //  translateX = (height*tan(angle))/2 - ((height*tan(angle))/2)*(1-scaleY)
+    //  translateY = (height*(1-scaleY))/2
+    //transform: translateY(75px) skewX(-30deg) translateX(28.87px) scaleY(0.4);
     z-index: 3;
 }
 

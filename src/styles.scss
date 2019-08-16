@@ -7,24 +7,10 @@ body, html {
     //background-color: #dddddd;
 }
 
-h1 {
+h1,h2 {
     margin: 15px 0 0 20px;
 }
 
 p {
     margin: 0 0 10px 30px;
-}
-
-.viewbox {
-    width: 90vw;
-    height: 80vh;
-    margin: 0 5vw;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.viewbox-container {
-    position: absolute;
-    width: 100vw;
-    text-align: center;
 }

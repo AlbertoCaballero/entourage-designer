@@ -1,36 +1,41 @@
 <!--Start top section. Title and description.-->
 <div>
-    <h1>Entourage Designer - Demo</h1>
-    <p>Initial proof of concept for the project</p>
+  <h2>Entourage Designer - Demo</h2>
+  <p>Initial proof of concept for the project</p>
 </div>
 
 <!--Start the container for the viewbox-->
 <div class="viewbox-container">
-    <div class="viewbox">
-        <!--Here goes the canvas and all the other good stuf-->
-        <div class="image-area" id="image-area">
-
-                <figure class="clip-path">
-                   <figure class="overlay-2">
-                     <figure class="overlay-1">
-                       <img id="image-top" src="https://i.ya-webdesign.com/images/sad-girl-png-6.png">
-                       <img id="shadow" src="https://i.ya-webdesign.com/images/sad-girl-png-6.png">
-                     </figure>
-                   </figure>
-                </figure>   
-         </div>
-
-         <!--Here the controlers and scrolls-->
-         <div class="adjust-controlers">
-             Lightsource X: {{rangex}}<br>
-             <input type="range" id="range-x" class="sliders" min="0" max="100" (input)="rangex=$event.target.value">
-
-             <br><br>
-
-             Lightsource Y: {{rangey}} <br>
-             <input type="range" id="range-y" class="sliders" min="0" max="100" (input)="rangey=$event.target.value">
-
-         </div>
+  <div class="viewbox">
+    <!--Here goes the canvas and all the other good stuf-->
+    <div class="image-area" id="image-area">
+      <img id="image-top" src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png">
+      <img id="shadow" src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png">
+    <!--
+      <figure class="overlay-2">
+        <figure class="overlay-1">
+          image usualy go here
+        </figure>
+      </figure>
+    -->
     </div>
-</div>
 
+    <!--Here the controlers and sliders-->
+    <div class="adjust-controlers">
+
+      Inclination: {{rangex}}<br>
+      <input type="range" id="range-x" class="sliders" min="-80" max="80" (input)="rangex=$event.target.value">
+
+      <br><br>
+
+      Height: {{rangey}}<br>
+      <input type="range" id="range-y" class="sliders" min="0" max="1" step="0.01" (input)="rangey=$event.target.value">
+
+      <br>
+
+      <input type="text" id="imgurl" class="text-input" placeholder="Image URL" (input)="imgsrc=$event.target.value">
+      <input type="button" class="imgbtn" value="Retrive" (click)="changeImage()"><br>
+
+    </div>
+  </div>
+</div>
