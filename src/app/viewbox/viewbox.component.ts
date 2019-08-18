@@ -28,6 +28,7 @@ export class ViewboxComponent implements OnInit {
   //Executed before showing anything
   ngOnInit() { 
     document.getElementById("shadow").style.filter = "brightness(1%) blur(5px) opacity(35%)";
+    document.getElementById("gradient-overlay").style.filter = "brightness(100%) blur(0px) opacity(20%)";
   }
 
   //Every time something changes this gets executed. First I need to change the values using the input.
@@ -48,6 +49,10 @@ export class ViewboxComponent implements OnInit {
     //Applies the new values
     document.getElementById("shadow").style.transform = 
       `translateY(${this.translatey}px) skewX(${this.skewx}deg) translateX(${-this.translatex}px) scaleY(${this.scaley})`;
+
+    //Modify gradient overlay properties
+    document.getElementById("gradient-overlay").style.background = 
+      `linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(212, 37, 37) ${ this.calculateLighting(this.skewx) }%, rgb(255, 255, 255) 50%, rgba(0,0,0,0) 100%)`;
   }
 
   changeImage() {
@@ -56,6 +61,16 @@ export class ViewboxComponent implements OnInit {
       document.getElementById("image-top").setAttribute("src", `${this.imgsrc}`);
     } else {
       alert("You need a URL");
+    }
+  }
+
+  calculateLighting(angle : number) : number {
+    //return (0.5 + (angle/80)/2)*100; //this is correct!
+    console.log((angle/80));
+    if(angle >= 0) {
+      return (0.5 + (angle/80)/2)*100; //this is correct!
+    } else {
+      return (0.5 + (angle/80)/2)*100; //This more less...
     }
   }
 
