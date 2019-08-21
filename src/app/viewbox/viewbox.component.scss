@@ -16,7 +16,6 @@
     margin: 0 5vw 0 5vw;
     padding: 10px;
     text-align: center;
-    //background-color: red;
 }
 
 .viewbox-container {
@@ -42,7 +41,7 @@
     margin: 20px 5px;
 }
 
-#image-top, #shadow, #gradient-overlay {
+#image-top, #shadow {
     height: 250px;
     width: auto;
     position: absolute;
@@ -59,7 +58,7 @@
     //transform: translateY(75px) skewX(-30deg) translateX(28.87px) scaleY(0.4);
 */
 
-#gradient-overlay {
+#gradient-overlay, #gradient-overlay-2 {
     z-index: 5;
     width: 25vw;
     height: 300px;
@@ -67,8 +66,7 @@
     position: absolute;
     right: 35vw;
     left: 35vw;
-    
-    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(212, 37, 37) 10%, rgb(255, 255, 255) 50%, rgba(0,0,0,0) 100%);
+    //background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(212, 37, 37) 10%, rgb(255, 255, 255) 50%, rgba(0,0,0,0) 100%);
 }
 
 #range-x, #range-y {

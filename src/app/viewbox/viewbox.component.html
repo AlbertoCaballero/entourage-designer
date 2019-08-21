@@ -1,7 +1,6 @@
 <!--Start top section. Title and description.-->
 <div>
-  <h2>Entourage Designer - Demo</h2>
-  <p>Initial proof of concept for the project</p>
+  <h2>Entourage Designer</h2>
 </div>
 
 <!--Start the container for the viewbox-->
@@ -10,6 +9,7 @@
     <!--Here goes the canvas and all the other good stuf-->
     <div class="image-area" id="image-area">
         <figure id="gradient-overlay" class="gradient-overlay"></figure>
+        <figure id="gradient-overlay-2" class="gradient-overlay"></figure>
         <img id="image-top" src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png">
         <img id="shadow" src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png">
     <!--
@@ -30,7 +30,7 @@
       <br><br>
 
       Height: {{rangey}}<br>
-      <input type="range" id="range-y" class="sliders" min="0" max="1" step="0.01" (input)="rangey=$event.target.value">
+      <input type="range" id="range-y" class="sliders" min="-1" max="1" step="0.01" (input)="rangey=$event.target.value">
 
       <br>
 
