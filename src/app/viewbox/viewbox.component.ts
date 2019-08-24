@@ -7,9 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ViewboxComponent implements OnInit {
-
-  //Retriveing the image references
-  imputs : any = document.querySelectorAll('.sliders input');
+  //Image source  
   imgsrc : string;
 
   //The parameters that will be updated
@@ -23,6 +21,8 @@ export class ViewboxComponent implements OnInit {
   scaley : number = 0;
   xval : number = 0;
 
+  //CONSTRUCTOR AND LIFE HOOKS
+
   constructor() { }
 
   //Executed before showing anything
@@ -33,6 +33,14 @@ export class ViewboxComponent implements OnInit {
 
   //Every time something changes this gets executed. First I need to change the values using the input.
   ngDoCheck() {
+    //This method hadles the DOM updates
+    this.updateComponents();
+  }
+
+  //UTILITARIAN METHODS
+
+  //This method habdles the DOM updating process
+  updateComponents() {
     //Recalculates the values
     this.skewx = this.rangex;
     this.scaley = this.rangey;
@@ -48,12 +56,11 @@ export class ViewboxComponent implements OnInit {
 
     //Modify gradient overlay properties
     document.getElementById("gradient-overlay").style.background = 
-      `linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(255, 255, 255, 1) ${ this.calculateLighting(this.skewx) }%, rgba(0,0,0,0) 100%)`;
-      //`linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(0, 0, 0, 0.5) ${ 100 - this.calculateLighting(this.skewx) }%, 
-      //rgb(255, 0, 255, 0.5) ${ this.calculateLighting(this.skewx) }%, rgba(0,0,0,0) 100%)`;
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(255, 255, 255, 0.25) ${ this.calculateLighting(this.skewx) }%, rgba(255,255,255,0) 100%)`;
 
+    //Modify gradient overlay 2 properties
     document.getElementById("gradient-overlay-2").style.background =
-      `linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(255, 255, 255, 0.25) ${ this.calculateLighting(this.skewx) + 5 }%, rgba(0,0,0,0) 100%)`;
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(255, 255, 255, 0.25) ${ this.calculateLighting(this.skewx) + 5 }%, rgba(255,255,255,0) 100%)`;
   }
 
   changeImage() {
