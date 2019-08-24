@@ -41,6 +41,23 @@
     margin: 20px 5px;
 }
 
+
+.mask {
+    -webkit-mask-image: url("../../assets/images/the-force-alpha.png");
+    mask-image: url("../../assets/images/the-force-alpha.png");
+    -webkit-mask-size: auto 250px;
+    mask-size: auto 250px;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    //margin: 0 5.7%;
+}
+
+.div-test {
+    width: 500px;
+    height: 500px;
+    background: rgb(185, 55, 55);
+}
+
 #image-top, #shadow {
     height: 250px;
     width: auto;
@@ -50,25 +67,16 @@
 #image-top { z-index: 4; }
 
 #shadow { z-index: 3; }
-/*This makes it look like a shadow: 
-    //  transform: skewX(45deg) translateX(-125px) scaleY(0.3) translateY(270px);
-    //The functions: 
-    //  translateX = (height*tan(angle))/2 - ((height*tan(angle))/2)*(1-scaleY)
-    //  translateY = (height*(1-scaleY))/2
-    //transform: translateY(75px) skewX(-30deg) translateX(28.87px) scaleY(0.4);
-*/
 
 #gradient-overlay, #gradient-overlay-2 {
-    z-index: 5;
-    width: 25vw;
-    height: 300px;
-    margin-top: -25px;
+    z-index: 6;
+    width: 300px;
+    height: 250px;
+    margin-top: -0px;
     position: absolute;
-    right: 35vw;
-    left: 35vw;
+    right: 40vw;
+    left: 40vw;
     //background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(212, 37, 37) 10%, rgb(255, 255, 255) 50%, rgba(0,0,0,0) 100%);
 }
 
-#range-x, #range-y {
-    width: 50vw;
-}
+#range-x, #range-y { width: 50vw; }

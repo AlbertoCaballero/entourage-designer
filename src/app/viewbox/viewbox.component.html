@@ -8,11 +8,15 @@
   <div class="viewbox">
     <!--Here goes the canvas and all the other good stuf-->
     <div class="image-area" id="image-area">
-        <figure id="gradient-overlay" class="gradient-overlay"></figure>
-        <figure id="gradient-overlay-2" class="gradient-overlay"></figure>
-        <img id="image-top" src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png">
-        <img id="shadow" src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png">
-    <!--
+      
+      <img id="image-top"
+        src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png">
+      <img id="shadow"
+        src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png">
+
+      <figure id="gradient-overlay" class="gradient-overlay mask"></figure>
+      <figure id="gradient-overlay-2" class="gradient-overlay mask"></figure>
+      <!--
       <figure class="overlay-2">
         <figure class="overlay-1">
           image usualy go here
@@ -30,7 +34,8 @@
       <br><br>
 
       Height: {{rangey}}<br>
-      <input type="range" id="range-y" class="sliders" min="-1" max="1" step="0.01" (input)="rangey=$event.target.value">
+      <input type="range" id="range-y" class="sliders" min="-1" max="1" step="0.01"
+        (input)="rangey=$event.target.value">
 
       <br>
 
@@ -39,4 +44,11 @@
 
     </div>
   </div>
+</div>
+<div>
+  <!--
+    <img src="../../assets/images/masking-example1.jpg" class="mask">
+    <div class="div-test mask"></div>
+
+  -->
 </div>

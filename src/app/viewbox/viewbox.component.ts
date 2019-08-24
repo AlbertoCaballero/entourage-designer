@@ -60,9 +60,10 @@ export class ViewboxComponent implements OnInit {
 
     //Modify gradient overlay 2 properties
     document.getElementById("gradient-overlay-2").style.background =
-      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(255, 255, 255, 0.25) ${ this.calculateLighting(this.skewx) + 5 }%, rgba(255,255,255,0) 100%)`;
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(255, 255, 255, 0.25) ${ this.calculateLighting(this.skewx) + 3 }%, rgba(255,255,255,0) 100%)`;
   }
 
+  //Retrives an loads the URL defined by the user
   changeImage() {
     if(this.imgsrc != null) {
       document.getElementById("shadow").setAttribute("src", `${this.imgsrc}`);
@@ -72,6 +73,7 @@ export class ViewboxComponent implements OnInit {
     }
   }
 
+  //Calculates tha percentage at wich the lighting should be
   calculateLighting(angle : number) : number {
     //The math function calculates the lighting overlay (0.5 + (angle/80)/2)*100 << TODO: Still needs calibration
     return (0.5 + (angle/80)/2)*100;
