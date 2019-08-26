@@ -11,8 +11,12 @@ export class ViewboxComponent implements OnInit {
   imgsrc : string;
 
   //The parameters that will be updated
-  rangex : number = 0;
-  rangey : number = 1;
+  rangex : number = -50;
+  rangey : number = 0.2;
+
+  //Translation values for viewbox
+  movex : number = 0;
+  movey : number = 0;
 
   //Properties to change
   translatey : number = 0;
@@ -41,6 +45,7 @@ export class ViewboxComponent implements OnInit {
 
   //This method habdles the DOM updating process
   updateComponents() {
+
     //Recalculates the values
     this.skewx = this.rangex;
     this.scaley = this.rangey;
@@ -56,11 +61,11 @@ export class ViewboxComponent implements OnInit {
 
     //Modify gradient overlay properties
     document.getElementById("gradient-overlay").style.background = 
-      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(255, 255, 255, 0.25) ${ this.calculateLighting(this.skewx) }%, rgba(255,255,255,0) 100%)`;
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) ${ this.calculateLighting(this.skewx) + 0 }%, rgba(255,255,255,0) 100%)`;
 
     //Modify gradient overlay 2 properties
     document.getElementById("gradient-overlay-2").style.background =
-      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(255, 255, 255, 0.25) ${ this.calculateLighting(this.skewx) + 3 }%, rgba(255,255,255,0) 100%)`;
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) ${ this.calculateLighting(this.skewx) + 4 }%, rgba(255,255,255,0) 100%)`;
   }
 
   //Retrives an loads the URL defined by the user
@@ -68,6 +73,7 @@ export class ViewboxComponent implements OnInit {
     if(this.imgsrc != null) {
       document.getElementById("shadow").setAttribute("src", `${this.imgsrc}`);
       document.getElementById("image-top").setAttribute("src", `${this.imgsrc}`);
+      document.getElementById("caracter-selection").setAttribute("src", `${this.imgsrc}`);
     } else {
       alert("You need an image URL!");
     }
@@ -77,6 +83,15 @@ export class ViewboxComponent implements OnInit {
   calculateLighting(angle : number) : number {
     //The math function calculates the lighting overlay (0.5 + (angle/80)/2)*100 << TODO: Still needs calibration
     return (0.5 + (angle/80)/2)*100;
+  }
+
+  //Depending on height it returns correct color
+  colorByHeight(height : number) : string {
+    if(height > 0) {
+      return "255, 255, 255, 0.25";
+    } else {
+      return "0, 0, 0, 0.5";
+    }
   }
 
 }

@@ -1,54 +1,59 @@
-<!--Start top section. Title and description.-->
-<div>
+<!--Here the controlers and sliders-->
+<div class="adjust-controlers">
+
   <h2>Entourage Designer</h2>
+
+  Inclination: {{rangex}}<br>
+  <input type="range" id="range-x" class="sliders" min="-80" max="80" (input)="rangex=$event.target.value">
+
+  <br><br>
+
+  Height: {{rangey}}<br>
+  <input type="range" id="range-y" class="sliders" min="-1" max="1" step="0.01" (input)="rangey=$event.target.value">
+
+  <br><br>
+
+  Character:
+  <div class="caracter-selection-container">
+    <img src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png"
+      class="caracter-selection">
+  </div>
+
+  <br><br>
+
+  Scene:
+  <div class="scene-selection-container">
+    <img src="https://www.canr.msu.edu/contentAsset/image/d68bb2ba-13c0-45e4-add0-f6266cdcd713/fileAsset/filter/Resize,Jpeg/resize_w/600/jpeg_q/100" class="scene-selection">
+  </div>
+
+  <br><br>
+
+  Translate:<br>
+  X: <input type="range" id="translate-x" class="sliders" min="-900" max="900" step="1" (input)="translatex=$event.target.value"><br>
+  Y: <input type="range" id="translate-y" class="sliders" min="-900" max="900" step="1" (input)="translatey=$event.target.value"><br>
+
+  <input type="text" id="imgurl" class="text-input" placeholder="Image URL" (input)="imgsrc=$event.target.value">
+  <input type="button" class="imgbtn" value="Retrive" (click)="changeImage()"><br>
+
 </div>
 
 <!--Start the container for the viewbox-->
-<div class="viewbox-container">
-  <div class="viewbox">
-    <!--Here goes the canvas and all the other good stuf-->
-    <div class="image-area" id="image-area">
-      
-      <img id="image-top"
-        src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png">
-      <img id="shadow"
-        src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png">
+<div class="viewbox" id="viewbox">
+  <!--Here goes the canvas and all the other good stuf-->
+  <div class="image-area">
 
-      <figure id="gradient-overlay" class="gradient-overlay mask"></figure>
-      <figure id="gradient-overlay-2" class="gradient-overlay mask"></figure>
-      <!--
-      <figure class="overlay-2">
-        <figure class="overlay-1">
-          image usualy go here
-        </figure>
-      </figure>
-    -->
-    </div>
+    <img id="image-top"
+      src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png">
 
-    <!--Here the controlers and sliders-->
-    <div class="adjust-controlers">
+    <img id="shadow"
+      src="https://www.pngkey.com/png/full/37-378581_immediate-entourage-cut-out-people-people-png-render.png">
 
-      Inclination: {{rangex}}<br>
-      <input type="range" id="range-x" class="sliders" min="-80" max="80" (input)="rangex=$event.target.value">
+    <img id="scene"
+      src="https://www.canr.msu.edu/contentAsset/image/d68bb2ba-13c0-45e4-add0-f6266cdcd713/fileAsset/filter/Resize,Jpeg/resize_w/600/jpeg_q/100">
 
-      <br><br>
+    <figure id="gradient-overlay" class="gradient-overlay mask"></figure>
+    <figure id="gradient-overlay-2" class="gradient-overlay mask"></figure>
 
-      Height: {{rangey}}<br>
-      <input type="range" id="range-y" class="sliders" min="-1" max="1" step="0.01"
-        (input)="rangey=$event.target.value">
-
-      <br>
-
-      <input type="text" id="imgurl" class="text-input" placeholder="Image URL" (input)="imgsrc=$event.target.value">
-      <input type="button" class="imgbtn" value="Retrive" (click)="changeImage()"><br>
-
-    </div>
   </div>
-</div>
-<div>
-  <!--
-    <img src="../../assets/images/masking-example1.jpg" class="mask">
-    <div class="div-test mask"></div>
 
-  -->
 </div>

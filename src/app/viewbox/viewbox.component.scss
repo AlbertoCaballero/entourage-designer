@@ -6,39 +6,61 @@
 
 }*/
 
-.image-area {
-    width: 80vw;
-    text-align: center;
-}
-.viewbox {
-    width: 90vw;
-    height: 80vh;
-    margin: 0 5vw 0 5vw;
-    padding: 10px;
-    text-align: center;
+h2 {
+    font-size: 1.3em;
+    margin: 25px 0;
+    font-weight: bolder;
 }
 
-.viewbox-container {
+.image-area {
+    width: 50vw;
+    height: 50vh;
+    text-align: left;
+    float: right;
+}
+
+.viewbox {
     width: 100vw;
+    height: 60vh;
+    margin: 20vh 0;
     text-align: center;
+    position: relative;
 }
 
 .adjust-controlers {
-    width: 90%;
-    bottom: 50px;
+    width: 270px;
+    height: 95vh;
     position: absolute;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    margin: 15px 15px;
+    text-align: center;
+    z-index: 10;
+    font-size: 0.9em;
+    background-color: white;
+    //overflow-y: scroll;
+    //padding-right: 17px;
+    //box-sizing: content-box;
 }
 
 .text-input {
-    width: 25vw;
+    width: 70%;
     height: 30px;
     margin: 20px 0px;
 }
 
 .imgbtn {
-    width: 100px;
-    height: 35px;
-    margin: 20px 5px;
+    width: 80%;
+    height: 30px;
+    margin: 0px 5px;
+    color: white;
+    border-width: 0px;
+    border-radius: 15px;
+    background-color: #2F80ED;
+}
+
+.imgbtn:hover {
+    cursor: pointer;
 }
 
 
@@ -49,7 +71,6 @@
     mask-size: auto 250px;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    //margin: 0 5.7%;
 }
 
 .div-test {
@@ -58,10 +79,39 @@
     background: rgb(185, 55, 55);
 }
 
+.caracter-selection-container, .scene-selection-container {
+    width: 80px;
+    height: 80px;
+    background-color: rgb(206, 206, 206);
+    position: initial;
+    margin: 5px 0 0 90px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.caracter-selection {
+    width: auto;
+    height: 100%;
+}
+
+.scene-selection {
+    width: 100%;
+    height: auto;
+}
+
 #image-top, #shadow {
     height: 250px;
     width: auto;
     position: absolute;
+    margin-left: 50px;
+}
+
+#scene {
+    height: 500px;
+    width: auto;
+    position: absolute;
+    margin: -200px 0 0 -200px;
+    z-index: 2;
 }
 
 #image-top { z-index: 4; }
@@ -70,13 +120,12 @@
 
 #gradient-overlay, #gradient-overlay-2 {
     z-index: 6;
-    width: 300px;
+    width: 150px;
     height: 250px;
     margin-top: -0px;
     position: absolute;
-    right: 40vw;
-    left: 40vw;
+    margin-left: 50px;
     //background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(212, 37, 37) 10%, rgb(255, 255, 255) 50%, rgba(0,0,0,0) 100%);
 }
 
-#range-x, #range-y { width: 50vw; }
+#range-x, #range-y { width: 80%; }
