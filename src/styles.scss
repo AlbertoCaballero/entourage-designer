@@ -6,4 +6,9 @@ body, html {
     color: #555555;
     overflow-x: hidden;
     overflow-y: hidden;
+    outline: 0;
+}
+
+input {
+    outline: 0;
 }
