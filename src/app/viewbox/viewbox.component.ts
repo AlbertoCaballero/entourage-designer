@@ -45,7 +45,6 @@ export class ViewboxComponent implements OnInit {
 
   //This method habdles the DOM updating process
   updateComponents() {
-
     //Recalculates the values
     this.skewx = this.rangex;
     this.scaley = this.rangey;
