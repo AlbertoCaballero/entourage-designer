@@ -4,35 +4,38 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-viewbox',
   templateUrl: './viewbox.component.html',
   styleUrls: ['./viewbox.component.scss']
-}) 
+})
 
 export class ViewboxComponent implements OnInit {
   //Image source  
-  imgsrc : string;
+  imgsrc: string;
 
   //The parameters that will be updated
-  rangex : number = -50;
-  rangey : number = 0.2;
+  rangex: number = -50;
+  rangey: number = 0.2;
 
   //Translation values for viewbox
-  movex : number = 0;
-  movey : number = 0;
+  movex: number = 0;
+  movey: number = 0;
 
   //Properties to change
-  translatey : number = 0;
-  skewx : number = 0;
-  translatex : number = 0;
-  scaley : number = 0;
-  xval : number = 0;
+  translatey: number = 0;
+  skewx: number = 0;
+  translatex: number = 0;
+  scaley: number = 0;
+  xval: number = 0;
 
   //CONSTRUCTOR AND LIFE HOOKS
-
   constructor() { }
 
   //Executed before showing anything
-  ngOnInit() { 
+  ngOnInit() {
     document.getElementById("shadow").style.filter = "brightness(1%) blur(5px) opacity(35%)";
-    document.getElementById("gradient-overlay").style.filter = "brightness(100%) blur(0px) opacity(20%)";
+
+    //Loads an image to the canvas
+    //this.canvasRendering();
+    document.getElementById("gradient-overlay").style.filter = "brightness(100%) blur(50px) opacity(30%)";
+    //var context = canvas.getContext('2D');
   }
 
   //Every time something changes this gets executed. First I need to change the values using the input.
@@ -49,27 +52,27 @@ export class ViewboxComponent implements OnInit {
     this.skewx = this.rangex;
     this.scaley = this.rangey;
 
-    this.xval = (250*(Math.tan(this.skewx*0.0174533)))/2;
-    this.translatex = this.xval - (this.xval*(1-this.scaley));
+    this.xval = (250 * (Math.tan(this.skewx * 0.0174533))) / 2;
+    this.translatex = this.xval - (this.xval * (1 - this.scaley));
 
-    this.translatey = (250*(1-this.scaley))/2;
+    this.translatey = (250 * (1 - this.scaley)) / 2;
 
     //Applies the new values for the shadow
-    document.getElementById("shadow").style.transform = 
+    document.getElementById("shadow").style.transform =
       `translateY(${this.translatey}px) skewX(${this.skewx}deg) translateX(${-this.translatex}px) scaleY(${this.scaley})`;
 
     //Modify gradient overlay properties
-    document.getElementById("gradient-overlay").style.background = 
-      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) ${ this.calculateLighting(this.skewx) + 0 }%, rgba(255,255,255,0) 100%)`;
+    document.getElementById("gradient-overlay").style.background =
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) ${this.calculateLighting(this.skewx) + 0}%, rgba(255,255,255,0) 100%)`;
 
     //Modify gradient overlay 2 properties
     document.getElementById("gradient-overlay-2").style.background =
-      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) ${ this.calculateLighting(this.skewx) + 4 }%, rgba(255,255,255,0) 100%)`;
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) ${this.calculateLighting(this.skewx) + 4}%, rgba(255,255,255,0) 100%)`;
   }
 
   //Retrives an loads the URL defined by the user
   changeImage() {
-    if(this.imgsrc != null) {
+    if (this.imgsrc != null) {
       document.getElementById("shadow").setAttribute("src", `${this.imgsrc}`);
       document.getElementById("image-top").setAttribute("src", `${this.imgsrc}`);
       document.getElementById("caracter-selection").setAttribute("src", `${this.imgsrc}`);
@@ -79,18 +82,48 @@ export class ViewboxComponent implements OnInit {
   }
 
   //Calculates tha percentage at wich the lighting should be
-  calculateLighting(angle : number) : number {
+  calculateLighting(angle: number): number {
     //The math function calculates the lighting overlay (0.5 + (angle/80)/2)*100 << TODO: Still needs calibration
-    return (0.5 + (angle/80)/2)*100;
+    return (0.5 + (angle / 80) / 2) * 100;
   }
 
   //Depending on height it returns correct color
-  colorByHeight(height : number) : string {
-    if(height > 0) {
+  colorByHeight(height: number): string {
+    if (height > 0) {
       return "255, 255, 255, 0.25";
     } else {
       return "0, 0, 0, 0.5";
     }
   }
 
+  //Canavas testing
+  canvasRendering() {
+    var canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
+    var context = canvas.getContext('2d');
+
+    var img = new Image();
+
+    img.onload = function() {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      context.drawImage(img, 0, 0, img.width, img.height);
+    } 
+    img.src = '../../assets/images/Student-alpha-2.png';
+
+    var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+    var data = imgData.data;
+
+    for(var i = 0; i < data.length; i+=4) {
+      if(data[i]!=0 && data[i+1]!=0 && data[i+2]!=0){
+        imgData.data[i+3]=0;
+      }
+    }
+
+    var canvasResult = <HTMLCanvasElement>document.getElementById(`canvasResult`);
+    var contextResult = canvasResult.getContext('2d');
+      canvasResult.width = canvas.width;
+      canvasResult.height = canvas.height;
+
+    contextResult.putImageData(imgData, 0, 0);
+  }
 }
