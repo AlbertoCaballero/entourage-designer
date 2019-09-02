@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EntourageDesigner } from '../../assets/classes/EntourageDesigner';
 
 @Component({
   selector: 'app-viewbox',
@@ -7,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ViewboxComponent implements OnInit {
+  //EntourageDesigner class instance for process handleing
+  designer: EntourageDesigner;
+
   //Image source  
   imgsrc: string;
 
@@ -44,7 +48,7 @@ export class ViewboxComponent implements OnInit {
     this.updateComponents();
   }
 
-  //UTILITARIAN METHODS
+
 
   //This method habdles the DOM updating process
   updateComponents() {
@@ -96,7 +100,7 @@ export class ViewboxComponent implements OnInit {
     }
   }
 
-  //Canavas testing
+  //Canavas image processing
   canvasRendering() {
     var canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
     var context = canvas.getContext('2d');
@@ -125,5 +129,16 @@ export class ViewboxComponent implements OnInit {
       canvasResult.height = canvas.height;
 
     contextResult.putImageData(imgData, 0, 0);
+  }
+
+  //Renders an image to a given URL
+  imageRendering() {
+    var canvas = <HTMLCanvasElement>document.getElementById(`canvasResult`);
+
+    var image = new Image();
+    image.src = canvas.toDataURL("image/png");
+
+    var loader = document.getElementById("imgLoader");
+    loader.setAttribute("src", image.src);
   }
 }
