@@ -21,9 +21,11 @@
 
   <br><br>
 
-  Translate:<br>
-  X: <input type="range" id="translate-x" class="sliders" min="-900" max="900" step="1" (input)="translatex=$event.target.value"><br>
-  Y: <input type="range" id="translate-y" class="sliders" min="-900" max="900" step="1" (input)="translatey=$event.target.value"><br>
+  <!--
+    Translate:<br>
+    X: <input type="range" id="translate-x" class="sliders" min="-900" max="900" step="1" (input)="translatex=$event.target.value"><br>
+    Y: <input type="range" id="translate-y" class="sliders" min="-900" max="900" step="1" (input)="translatey=$event.target.value"><br>
+  -->
 
   <input type="text" id="imgurl" class="text-input" placeholder="Image URL" (input)="imgsrc=$event.target.value">
   <input type="button" class="imgbtn" value="Retrive" (click)="changeImage()"><br><br>
@@ -46,7 +48,7 @@
     <figure id="gradient-overlay" class="gradient-overlay mask"></figure>
     <figure id="gradient-overlay-2" class="gradient-overlay mask"></figure>
 
-    <img id="imgLoader">
+    <img id="imgLoader" style="width: auto; height: 250px;">
 
     <canvas id="canvasProcessor" width="500px" height="500px" style="border: 1px solid #000000; height: 250px; width: auto; float: right; visibility: visible;"></canvas>
     <canvas id="canvasResult" width="500px" height="500px" style="border: 1px solid #000000; height: 250px; width: auto; float: right; visibility: visible;"></canvas>

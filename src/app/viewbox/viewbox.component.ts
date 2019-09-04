@@ -29,7 +29,7 @@ export class ViewboxComponent implements OnInit {
   scaley: number = 0;
   xval: number = 0;
 
-  //CONSTRUCTOR AND LIFE HOOKS
+//CONSTRUCTOR AND LIFE HOOKS////////////////////////////////////////////////////////////////////////////////////////////////
   constructor() { }
 
   //Executed before showing anything
@@ -48,7 +48,7 @@ export class ViewboxComponent implements OnInit {
     this.updateComponents();
   }
 
-
+//UTILITARIAN METHODS//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //This method habdles the DOM updating process
   updateComponents() {
@@ -67,11 +67,13 @@ export class ViewboxComponent implements OnInit {
 
     //Modify gradient overlay properties
     document.getElementById("gradient-overlay").style.background =
-      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) ${this.calculateLighting(this.skewx) + 0}%, rgba(255,255,255,0) 100%)`;
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) 
+      ${this.calculateLighting(this.skewx) + 0}%, rgba(255,255,255,0) 100%)`;
 
     //Modify gradient overlay 2 properties
     document.getElementById("gradient-overlay-2").style.background =
-      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) ${this.calculateLighting(this.skewx) + 4}%, rgba(255,255,255,0) 100%)`;
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) 
+      ${this.calculateLighting(this.skewx) + 4}%, rgba(255,255,255,0) 100%)`;
   }
 
   //Retrives an loads the URL defined by the user
@@ -102,36 +104,45 @@ export class ViewboxComponent implements OnInit {
 
   //Canavas image processing
   canvasRendering() {
+    //Retrive the reference to the onject that we are gona modify
     var canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
     var context = canvas.getContext('2d');
 
+    //Instance of an image object
     var img = new Image();
 
+    //This gets executed when the image is loaded
     img.onload = function() {
       canvas.width = img.width;
       canvas.height = img.height;
       context.drawImage(img, 0, 0, img.width, img.height);
     } 
+
+    //This is when we load the image, the function on top will get executed after
     img.src = '../../assets/images/Student-alpha-2.png';
 
+    //Load an object with the array of pixel in the canvas
     var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
     var data = imgData.data;
 
+    //Runs through the image data and changes its values to 0 if the pixel is not black
     for(var i = 0; i < data.length; i+=4) {
       if(data[i]!=0 && data[i+1]!=0 && data[i+2]!=0){
         imgData.data[i+3]=0;
       }
     }
 
+    //Get a reference to another canvas that will be used to display the result
     var canvasResult = <HTMLCanvasElement>document.getElementById(`canvasResult`);
     var contextResult = canvasResult.getContext('2d');
       canvasResult.width = canvas.width;
       canvasResult.height = canvas.height;
 
+    //Loads the resulting image to the new canvas
     contextResult.putImageData(imgData, 0, 0);
   }
 
-  //Renders an image to a given URL
+  //Renders an image loaded in a canvas to a given URL
   imageRendering() {
     var canvas = <HTMLCanvasElement>document.getElementById(`canvasResult`);
 
