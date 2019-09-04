@@ -65,12 +65,23 @@ h2 {
 
 
 .mask {
+    -webkit-mask-image: url("../../assets/images/Student-alpha-4.png");
+    mask-image: url("../../assets/images/Student-alpha-4.png");
+    -webkit-mask-size: auto 250px;
+    mask-size: auto 250px;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    filter: opacity(20%);
+}
+
+.mask2 {
     -webkit-mask-image: url("../../assets/images/Student-alpha-3.png");
     mask-image: url("../../assets/images/Student-alpha-3.png");
     -webkit-mask-size: auto 250px;
     mask-size: auto 250px;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
+    filter: opacity(20%);
 }
 
 .div-test {
@@ -118,7 +129,7 @@ h2 {
 
 #shadow { z-index: 3; }
 
-#gradient-overlay, #gradient-overlay-2 {
+#gradient-overlay, #gradient-overlay-2, #gradient-overlay-sec, #gradient-overlay-sec-2 {
     z-index: 6;
     width: 150px;
     height: 250px;

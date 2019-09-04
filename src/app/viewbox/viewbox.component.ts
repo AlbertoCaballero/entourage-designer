@@ -67,13 +67,23 @@ export class ViewboxComponent implements OnInit {
 
     //Modify gradient overlay properties
     document.getElementById("gradient-overlay").style.background =
-      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) 
-      ${this.calculateLighting(this.skewx) + 0}%, rgba(255,255,255,0) 100%)`;
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.notColorByHeight(this.scaley)}) 
+      ${this.calculateLighting(this.skewx)}%, rgba(255,255,255,0) 100%)`;
 
     //Modify gradient overlay 2 properties
     document.getElementById("gradient-overlay-2").style.background =
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.notColorByHeight(this.scaley)}) 
+      ${this.calculateLighting(this.skewx)}%, rgba(0,0,0,0) 100%)`;
+
+    //Modify gradient overlay properties for the alternative
+    document.getElementById("gradient-overlay-sec").style.background =
       `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) 
-      ${this.calculateLighting(this.skewx) + 4}%, rgba(255,255,255,0) 100%)`;
+      ${this.calculateLighting(this.skewx)}%, rgba(255,255,255,0) 100%)`;
+
+    //Modify gradient overlay 2 properties for the alternative
+    document.getElementById("gradient-overlay-sec-2").style.background =
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) 
+      ${this.calculateLighting(this.skewx)}%, rgba(0,0,0,0) 100%)`;
   }
 
   //Retrives an loads the URL defined by the user
@@ -96,9 +106,18 @@ export class ViewboxComponent implements OnInit {
   //Depending on height it returns correct color
   colorByHeight(height: number): string {
     if (height > 0) {
-      return "255, 255, 255, 0.25";
+      return "255, 255, 255, 0.5";
     } else {
       return "0, 0, 0, 0.5";
+    }
+  }
+
+  //Depending on height it returns correct color but negated
+  notColorByHeight(height: number): string {
+    if (height > 0) {
+      return "0, 0, 0, 0.5";
+    } else {
+      return "255, 255, 255, 0.5";
     }
   }
 
@@ -127,7 +146,7 @@ export class ViewboxComponent implements OnInit {
 
     //Runs through the image data and changes its values to 0 if the pixel is not black
     for(var i = 0; i < data.length; i+=4) {
-      if(data[i]!=0 && data[i+1]!=0 && data[i+2]!=0){
+      if(data[i]==0 && data[i+1]==0 && data[i+2]==0){
         imgData.data[i+3]=0;
       }
     }
