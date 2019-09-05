@@ -35,10 +35,11 @@ export class ViewboxComponent implements OnInit {
   //Executed before showing anything
   ngOnInit() {
     document.getElementById("shadow").style.filter = "brightness(1%) blur(5px) opacity(35%)";
+    document.getElementById("gradient-overlay").style.filter = "brightness(100%) blur(50px) opacity(30%)";
 
     //Loads an image to the canvas
     //this.canvasRendering();
-    document.getElementById("gradient-overlay").style.filter = "brightness(100%) blur(50px) opacity(30%)";
+    
     //var context = canvas.getContext('2D');
   }
 
