@@ -11,12 +11,17 @@ export class ViewboxComponent implements OnInit {
   //EntourageDesigner class instance for process handleing
   designer: EntourageDesigner;
 
-  //Image source  
-  imgsrc: string;
+  //Image source - Defaults to a student image
+  imgsrc: string = "../../assets/images/Student.png";
 
   //The parameters that will be updated
-  rangex: number = -50;
-  rangey: number = 0.2;
+  rangex: number = -70;
+  rangey: number = 0.25;
+  blurNum: number = 5;
+  opacityNum: number = 35;
+  brightNum: number = 1;
+  contNum: number = 1;
+  satNum: number = 1;
 
   //Translation values for viewbox
   movex: number = 0;
@@ -29,13 +34,15 @@ export class ViewboxComponent implements OnInit {
   scaley: number = 0;
   xval: number = 0;
 
-//CONSTRUCTOR AND LIFE HOOKS////////////////////////////////////////////////////////////////////////////////////////////////
+//CONSTRUCTOR AND LIFE HOOKS////////////////////////////////////////////////////////////////////////////////////////////
   constructor() { }
 
   //Executed before showing anything
   ngOnInit() {
-    document.getElementById("shadow").style.filter = "brightness(1%) blur(5px) opacity(35%)";
-    document.getElementById("gradient-overlay").style.filter = "brightness(100%) blur(50px) opacity(30%)";
+    document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
+    document.getElementById("gradient-overlay").style.filter = `brightness(100%) blur(50px) opacity(30%)`;
+
+    document.getElementById("image-top").style.filter = `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
 
     //Loads an image to the canvas
     //this.canvasRendering();
@@ -49,7 +56,7 @@ export class ViewboxComponent implements OnInit {
     this.updateComponents();
   }
 
-//UTILITARIAN METHODS//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//UTILITARIAN METHODS///////////////////////////////////////////////////////////////////////////////////////////////////
 
   //This method habdles the DOM updating process
   updateComponents() {
@@ -61,6 +68,12 @@ export class ViewboxComponent implements OnInit {
     this.translatex = this.xval - (this.xval * (1 - this.scaley));
 
     this.translatey = (250 * (1 - this.scaley)) / 2;
+
+    //Update shadow properties
+    document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
+
+    //Update character in viewbox properties
+    document.getElementById("image-top").style.filter = `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
 
     //Applies the new values for the shadow
     document.getElementById("shadow").style.transform =
@@ -122,11 +135,11 @@ export class ViewboxComponent implements OnInit {
     }
   }
 
-  //Canavas image processing
+  //Canavas image processing for light zones
   canvasRendering() {
     //Retrive the reference to the onject that we are gona modify
-    var canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
-    var context = canvas.getContext('2d');
+    const canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
+    const context = canvas.getContext('2d');
 
     //Instance of an image object
     var img = new Image();
@@ -136,10 +149,10 @@ export class ViewboxComponent implements OnInit {
       canvas.width = img.width;
       canvas.height = img.height;
       context.drawImage(img, 0, 0, img.width, img.height);
-    } 
+    }
 
-    //This is when we load the image, the function on top will get executed after
-    img.src = '../../assets/images/Student-alpha-2.png';
+    //This is when we load the image, the onload function will get executed after
+    img.src = this.imgsrc;
 
     //Load an object with the array of pixel in the canvas
     var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
@@ -148,6 +161,46 @@ export class ViewboxComponent implements OnInit {
     //Runs through the image data and changes its values to 0 if the pixel is not black
     for(var i = 0; i < data.length; i+=4) {
       if(data[i]==0 && data[i+1]==0 && data[i+2]==0){
+        imgData.data[i+3]=0;
+      }
+    }
+
+    //Get a reference to another canvas that will be used to display the result
+    var canvasResult = <HTMLCanvasElement>document.getElementById('canvasResult');
+    var contextResult = canvasResult.getContext('2d');
+      canvasResult.width = canvas.width;
+      canvasResult.height = canvas.height;
+
+    //Loads the resulting image to the new canvas
+    contextResult.putImageData(imgData, 0, 0);
+  }
+
+  //Canavas image processing for dark zones
+  notCanvasRendering() {
+    //Retrive the reference to the onject that we are gona modify
+    const canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
+    const context = canvas.getContext('2d');
+
+    //Instance of an image object
+    var img = new Image();
+
+    //This gets executed when the image is loaded
+    img.onload = function() {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      context.drawImage(img, 0, 0, img.width, img.height);
+    }
+
+    //This is when we load the image, the onload function will get executed after
+    img.src = this.imgsrc;
+
+    //Load an object with the array of pixel in the canvas
+    var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+    var data = imgData.data;
+
+    //Runs through the image data and changes its values to 0 if the pixel is not black
+    for(var i = 0; i < data.length; i+=4) {
+      if(data[i]!=0 && data[i+1]!=0 && data[i+2]!=0){
         imgData.data[i+3]=0;
       }
     }
@@ -171,5 +224,40 @@ export class ViewboxComponent implements OnInit {
 
     var loader = document.getElementById("imgLoader");
     loader.setAttribute("src", image.src);
+
+    //Set the images as masks
+    document.getElementById("gradient-overlay").style.maskImage = image.src;
+    document.getElementById("gradient-overlay-2").style.maskImage = image.src;
+    document.getElementById("gradient-overlay-sec").style.maskImage = image.src;
+    document.getElementById("gradient-overlay-sec-2").style.maskImage = image.src;
+  }
+
+  //Process and applies filter for the masking creation
+  renderMasks() {
+    //Here we process the original loaded image to be black and withe and high contrast
+    const canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
+    const context = canvas.getContext('2d');
+    const image = <any>document.getElementById('image-top');
+    
+    canvas.height = image.height;
+    canvas.width = image.width;
+
+    context.filter = 'saturate(0%) contrast(2500%) brightness(25%)';
+    context.drawImage(image, 0, 0, image.width, image.height);
+
+    /**
+     * <figure id="gradient-overlay" class="gradient-overlay mask2"></figure>
+    <figure id="gradient-overlay-2" class="gradient-overlay mask2"></figure>
+
+    <figure id="gradient-overlay-sec" class="gradient-overlay mask"></figure>
+    <figure id="gradient-overlay-sec-2" class="gradient-overlay mask"></figure>
+     */
+
+    //Set the mask property to the newly created masking image
+  }
+
+  //Render final image
+  render() {
+    console.log("Still working on it");
   }
 }

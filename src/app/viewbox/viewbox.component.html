@@ -1,22 +1,38 @@
 <!--Here the controlers and sliders-->
+
+<input type="range" id="range-x" class="slider-inclination input-sliders" min="-80" max="80" value={{rangex}} (input)="rangex=$event.target.value">
+<input type="range" id="range-y" class="slider-height input-sliders" min="-1" max="1" step="0.01" value={{rangey}} (input)="rangey=$event.target.value">
+
 <div class="adjust-controlers">
 
+  <!--
+    Inclination: {{rangex}}<br>
+    Height: {{rangey}}<br>
+    <br>
+  -->
   <h2>Entourage Designer</h2>
-
-  Inclination: {{rangex}}<br>
-  <input type="range" id="range-x" class="sliders" min="-80" max="80" (input)="rangex=$event.target.value">
-
-  <br><br>
-
-  Height: {{rangey}}<br>
-  <input type="range" id="range-y" class="sliders" min="-1" max="1" step="0.01" (input)="rangey=$event.target.value">
-
-  <br><br>
-
-  Character:
+  
+  <b>Character:</b>
   <div class="caracter-selection-container">
     <img src="../../assets/images/Student.png"
-      class="caracter-selection">
+      class="caracter-selection" id="caracter-selection">
+  </div><br>
+  <div style="display: inline-block; margin-bottom: 15px;">
+      <input type="text" id="imgurl" class="text-input" placeholder="Image URL" (input)="imgsrc=$event.target.value">
+      <input type="button" class="imgbutton" value="Find" (click)="changeImage()">
+  </div>
+  <div class="character-properties-container">
+    Brightness <input type="number" id="bright-number" min="0" step="0.01" (input)="brightNum=$event.target.value" style="width: 50px; height: 20px;" value={{brightNum}}><br>
+    Contrast <input type="number" id="cont-number" min="0" step="0.01" (input)="contNum=$event.target.value" style="width: 50px; height: 20px;" value={{contNum}}><br>
+    Saturation <input type="number" id="sat-number" min="0" step="0.01" (input)="satNum=$event.target.value" style="width: 50px; height: 20px;" value={{satNum}}><br>
+  </div>
+
+  <br><br>
+
+  <b>Shadow:</b>
+  <div class="shadow-properties-container">
+    Opacity <input type="number" id="opacity-number" min="0" (input)="opacityNum=$event.target.value" style="width: 50px; height: 20px;" value={{opacityNum}}><br>
+    Blur <input type="number" id="blur-number" min="0" (input)="blurNum=$event.target.value" style="width: 50px; height: 20px;" value={{blurNum}}><br>
   </div>
 
   <br><br>
@@ -25,13 +41,17 @@
     Translate:<br>
     X: <input type="range" id="translate-x" class="sliders" min="-900" max="900" step="1" (input)="translatex=$event.target.value"><br>
     Y: <input type="range" id="translate-y" class="sliders" min="-900" max="900" step="1" (input)="translatey=$event.target.value"><br>
+  
+
+  <input type="button" class="imgbtn" value="Render" (click)="canvasRendering()">
+  <input type="button" class="imgbtn" value="Image" (click)="imageRendering()">
+  <input type="button" class="" value="render" (click)="renderMasks()">
+
   -->
 
-  <input type="text" id="imgurl" class="text-input" placeholder="Image URL" (input)="imgsrc=$event.target.value">
-  <input type="button" class="imgbtn" value="Retrive" (click)="changeImage()"><br><br>
-  <input type="button" class="imgbtn" value="Render" (click)="canvasRendering()"><br><br>
-  <input type="button" class="imgbtn" value="Image" (click)="imageRendering()"><br><br>
-
+  <div style="position: absolute; width: inherit; bottom: 20px;">
+    <input type="button" value="Export" class="imgbtn" style="position: relative; bottom: 0px;" (click)="render()">
+  </div>
 </div>
 
 <!--Start the container for the viewbox-->
@@ -45,16 +65,20 @@
     <img id="shadow"
       src="../../assets/images/Student.png">
 
-    <figure id="gradient-overlay" class="gradient-overlay mask2"></figure>
-    <figure id="gradient-overlay-2" class="gradient-overlay mask2"></figure>
+    <div style="visibility: hidden">
+      <figure id="gradient-overlay" class="gradient-overlay mask2"></figure>
+      <figure id="gradient-overlay-2" class="gradient-overlay mask2"></figure>
 
-    <figure id="gradient-overlay-sec" class="gradient-overlay mask"></figure>
-    <figure id="gradient-overlay-sec-2" class="gradient-overlay mask"></figure>
+      <figure id="gradient-overlay-sec" class="gradient-overlay mask"></figure>
+      <figure id="gradient-overlay-sec-2" class="gradient-overlay mask"></figure>
+    </div>
 
-    <img id="imgLoader" style="width: auto; height: 250px;">
+    <img id="imgLoader" style="width: auto; height: 250px; visibility: hidden;">
 
-    <canvas id="canvasProcessor" width="500px" height="500px" style="border: 1px solid #000000; height: 250px; width: auto; float: right; visibility: hidden;"></canvas>
-    <canvas id="canvasResult" width="500px" height="500px" style="border: 1px solid #000000; height: 250px; width: auto; float: right; visibility: hidden;"></canvas>
+    <canvas id="canvasProcessor" width="500px" height="500px" style="border: 1px solid #000000; float: right; visibility: hidden;"></canvas>
+    <canvas id="canvasResult" width="500px" height="500px" style="border: 1px solid #000000; float: right; visibility: hidden;"></canvas>
+
+    <canvas id="renderCanvas" width="500px" height="500px" style="border: 1px solid #000000; float: right;"></canvas> 
 
   </div>
 

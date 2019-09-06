@@ -46,7 +46,11 @@ h2 {
 .text-input {
     width: 70%;
     height: 30px;
-    margin: 20px 0px;
+    margin: 10px 0px;
+}
+
+.imgbutton {
+
 }
 
 .imgbtn {
@@ -57,6 +61,7 @@ h2 {
     border-width: 0px;
     border-radius: 15px;
     background-color: #2F80ED;
+    margin: 5px;
 }
 
 .imgbtn:hover {
@@ -110,6 +115,17 @@ h2 {
     height: auto;
 }
 
+.slider-inclination {
+    position: absolute;
+    right: 0px;
+}
+
+.character-properties-container, .shadow-properties-container {
+    line-height: 40px; 
+    text-align: right; 
+    padding: 0 60px;
+}
+
 #image-top, #shadow {
     height: 250px;
     width: auto;
@@ -139,4 +155,110 @@ h2 {
     //background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(212, 37, 37) 10%, rgb(255, 255, 255) 50%, rgba(0,0,0,0) 100%);
 }
 
-#range-x, #range-y { width: 80%; }
+#range-x, #range-y { width: 300px; }
+
+#range-x {
+    position: absolute;
+    bottom: 0px;
+    float: unset;
+    width: 70vw;
+    margin: 0 80px 50px 0;
+    z-index: 16;
+}
+
+#range-y {
+    position: absolute;
+    right: 0px;
+    float: unset;
+    transform: rotate(90deg);
+    width: 80vh;
+    margin: 45vh -35vh 0 0;
+    z-index: 15;
+}
+
+//Slider customization
+input[type=range].input-sliders {
+    -webkit-appearance: none;
+    width: 100%;
+    margin: 5px 0;
+  }
+  input[type=range].input-sliders:focus {
+    outline: none;
+  }
+  input[type=range].input-sliders::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    box-shadow: px px px #000000, 0px 0px px #0d0d0d;
+    background: rgba(47, 128, 237, 0.7);
+    border-radius: 25px;
+    border: 0px solid #010101;
+  }
+  input[type=range].input-sliders::-webkit-slider-thumb {
+    box-shadow: 1px 1px 0.5px #000031, 0px 0px 1px #00004b;
+    border: 0px solid #000000;
+    height: 15px;
+    width: 15px;
+    border-radius: 15px;
+    background: #2f80ed;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -5px;
+  }
+  input[type=range].input-sliders:focus::-webkit-slider-runnable-track {
+    background: rgba(70, 142, 239, 0.7);
+  }
+  input[type=range].input-sliders::-moz-range-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    box-shadow: px px px #000000, 0px 0px px #0d0d0d;
+    background: rgba(47, 128, 237, 0.7);
+    border-radius: 25px;
+    border: 0px solid #010101;
+  }
+  input[type=range].input-sliders::-moz-range-thumb {
+    box-shadow: 1px 1px 0.5px #000031, 0px 0px 1px #00004b;
+    border: 0px solid #000000;
+    height: 15px;
+    width: 15px;
+    border-radius: 15px;
+    background: #2f80ed;
+    cursor: pointer;
+  }
+  input[type=range].input-sliders::-ms-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  input[type=range].input-sliders::-ms-fill-lower {
+    background: rgba(24, 114, 235, 0.7);
+    border: 0px solid #010101;
+    border-radius: 50px;
+    box-shadow: px px px #000000, 0px 0px px #0d0d0d;
+  }
+  input[type=range].input-sliders::-ms-fill-upper {
+    background: rgba(47, 128, 237, 0.7);
+    border: 0px solid #010101;
+    border-radius: 50px;
+    box-shadow: px px px #000000, 0px 0px px #0d0d0d;
+  }
+  input[type=range].input-sliders::-ms-thumb {
+    box-shadow: 1px 1px 0.5px #000031, 0px 0px 1px #00004b;
+    border: 0px solid #000000;
+    height: 15px;
+    width: 15px;
+    border-radius: 15px;
+    background: #2f80ed;
+    cursor: pointer;
+    height: 5px;
+  }
+  input[type=range].input-sliders:focus::-ms-fill-lower {
+    background: rgba(47, 128, 237, 0.7);
+  }
+  input[type=range].input-sliders:focus::-ms-fill-upper {
+    background: rgba(70, 142, 239, 0.7);
+  }
