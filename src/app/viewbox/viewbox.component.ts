@@ -256,7 +256,7 @@ export class ViewboxComponent implements OnInit {
     //Set the mask property to the newly created masking image
   }
 
-  //Render final image
+  //Render final image. TODO: It has to render to PSD and PNG
   render() {
     console.log("Still working on it");
   }

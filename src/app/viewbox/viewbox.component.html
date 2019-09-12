@@ -5,11 +5,6 @@
 
 <div class="adjust-controlers">
 
-  <!--
-    Inclination: {{rangex}}<br>
-    Height: {{rangey}}<br>
-    <br>
-  -->
   <h2>Entourage Designer</h2>
   
   <b>Character:</b>
@@ -31,11 +26,9 @@
 
   <b>Shadow:</b>
   <div class="shadow-properties-container">
-    Opacity <input type="number" id="opacity-number" min="0" (input)="opacityNum=$event.target.value" style="width: 50px; height: 20px;" value={{opacityNum}}><br>
-    Blur <input type="number" id="blur-number" min="0" (input)="blurNum=$event.target.value" style="width: 50px; height: 20px;" value={{blurNum}}><br>
+    Opacity: {{opacityNum}}<br><input type="range" id="opacity-number" min="0" max="100" step="1" (input)="opacityNum=$event.target.value" class="range-shadow" value={{opacityNum}}><br>
+    Blur: {{blurNum}}<br><input type="range" id="blur-number" min="0" max="50" step="1" (input)="blurNum=$event.target.value" class="range-shadow" value={{blurNum}}><br>
   </div>
-
-  <br><br>
 
   <!--
     Translate:<br>
@@ -49,8 +42,8 @@
 
   -->
 
-  <div style="position: absolute; width: inherit; bottom: 20px;">
-    <input type="button" value="Export" class="imgbtn" style="position: relative; bottom: 0px;" (click)="render()">
+  <div style="position: sticky; width: inherit; bottom: 5px;">
+    <input type="button" value="Export" class="imgbtn" (click)="render()">
   </div>
 </div>
 
