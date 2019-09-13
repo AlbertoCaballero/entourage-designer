@@ -40,13 +40,18 @@ h2 {
     background-color: white;
     overflow-y: hidden;
     overflow-x: hidden;
-    margin-right: 20px;
-    //padding-right: 17px;
-    //box-sizing: content-box;
+    .title {
+      position: sticky; width: inherit; top: 0px; padding-top: 5px; z-index: 20; background-color: white;
+    }
+
+    .button {
+      position: sticky; width: inherit; bottom: 0px; margin-bottom: 5px; z-index: 20; background-color: white;
+    }
 }
 
 .adjust-controlers:hover {
   overflow-y: auto;
+  padding-right: 0px;
 }
 
 .adjust-controlers::-webkit-scrollbar {
@@ -105,9 +110,6 @@ h2 {
     width: 80px;
     height: 80px;
     background-color: rgb(206, 206, 206);
-    position: relative;
-    margin: 5px 0 0 90px;
-    padding: 5px;
     cursor: pointer;
 }
 

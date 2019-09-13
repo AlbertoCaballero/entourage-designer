@@ -1,33 +1,43 @@
 <!--Here the controlers and sliders-->
 
-<input type="range" id="range-x" class="slider-inclination input-sliders" min="-80" max="80" value={{rangex}} (input)="rangex=$event.target.value">
-<input type="range" id="range-y" class="slider-height input-sliders" min="-1" max="1" step="0.01" value={{rangey}} (input)="rangey=$event.target.value">
+<input type="range" id="range-x" class="slider-inclination input-sliders" min="-80" max="80" value={{rangex}}
+  (input)="rangex=$event.target.value">
+<input type="range" id="range-y" class="slider-height input-sliders" min="-1" max="1" step="0.01" value={{rangey}}
+  (input)="rangey=$event.target.value">
 
 <div class="adjust-controlers">
+  <div class="title">
+    <h2>Entourage Designer</h2>
+  </div>
 
-  <h2>Entourage Designer</h2>
-  
   <b>Character:</b>
-  <div class="caracter-selection-container">
-    <img src="../../assets/images/Student.png"
-      class="caracter-selection" id="caracter-selection">
-  </div><br>
+  <div style="text-align: center; height: auto; padding: 0 37%">
+      <div class="caracter-selection-container">
+        <img src="../../assets/images/Student.png" class="caracter-selection" id="caracter-selection">
+      </div>
+  </div>
+
   <div style="display: inline-block; margin-bottom: 15px;">
-      <input type="text" id="imgurl" class="text-input" placeholder="Image URL" (input)="imgsrc=$event.target.value">
-      <input type="button" class="imgbutton" value="Find" (click)="changeImage()">
+    <input type="text" id="imgurl" class="text-input" placeholder="Image URL" (input)="imgsrc=$event.target.value">
+    <input type="button" class="imgbutton" value="Find" (click)="changeImage()">
   </div>
   <div class="character-properties-container">
-    Brightness <input type="number" id="bright-number" min="0" step="0.01" (input)="brightNum=$event.target.value" style="width: 50px; height: 20px;" value={{brightNum}}><br>
-    Contrast <input type="number" id="cont-number" min="0" step="0.01" (input)="contNum=$event.target.value" style="width: 50px; height: 20px;" value={{contNum}}><br>
-    Saturation <input type="number" id="sat-number" min="0" step="0.01" (input)="satNum=$event.target.value" style="width: 50px; height: 20px;" value={{satNum}}><br>
+    Brightness <input type="number" id="bright-number" min="0" step="0.01" (input)="brightNum=$event.target.value"
+      style="width: 50px; height: 20px;" value={{brightNum}}><br>
+    Contrast <input type="number" id="cont-number" min="0" step="0.01" (input)="contNum=$event.target.value"
+      style="width: 50px; height: 20px;" value={{contNum}}><br>
+    Saturation <input type="number" id="sat-number" min="0" step="0.01" (input)="satNum=$event.target.value"
+      style="width: 50px; height: 20px;" value={{satNum}}><br>
   </div>
 
   <br><br>
 
   <b>Shadow:</b>
   <div class="shadow-properties-container">
-    Opacity: {{opacityNum}}<br><input type="range" id="opacity-number" min="0" max="100" step="1" (input)="opacityNum=$event.target.value" class="range-shadow" value={{opacityNum}}><br>
-    Blur: {{blurNum}}<br><input type="range" id="blur-number" min="0" max="50" step="1" (input)="blurNum=$event.target.value" class="range-shadow" value={{blurNum}}><br>
+    Opacity: {{opacityNum}}<br><input type="range" id="opacity-number" min="0" max="100" step="1"
+      (input)="opacityNum=$event.target.value" class="range-shadow" value={{opacityNum}}><br>
+    Blur: {{blurNum}}<br><input type="range" id="blur-number" min="0" max="50" step="1"
+      (input)="blurNum=$event.target.value" class="range-shadow" value={{blurNum}}><br>
   </div>
 
   <!--
@@ -42,7 +52,15 @@
 
   -->
 
-  <div style="position: sticky; width: inherit; bottom: 5px;">
+
+  <p>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde voluptas sint voluptates quibusdam deleniti iste
+    possimus nobis tempore in nisi deserunt ratione placeat, fugiat incidunt enim, facere aspernatur tempora quaerat?
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad praesentium dolorem ab distinctio impedit. Corrupti,
+    optio. Eveniet cupiditate vel, sed nisi voluptatem aut atque distinctio laudantium, molestias nemo ipsam modi!
+  </p>
+
+  <div class="button">
     <input type="button" value="Export" class="imgbtn" (click)="render()">
   </div>
 </div>
@@ -52,11 +70,9 @@
   <!--Here goes the canvas and all the other good stuf-->
   <div class="image-area">
 
-    <img id="image-top"
-      src="../../assets/images/Student.png">
+    <img id="image-top" src="../../assets/images/Student.png">
 
-    <img id="shadow"
-      src="../../assets/images/Student.png">
+    <img id="shadow" src="../../assets/images/Student.png">
 
     <div style="visibility: hidden">
       <figure id="gradient-overlay" class="gradient-overlay mask2"></figure>
@@ -66,12 +82,14 @@
       <figure id="gradient-overlay-sec-2" class="gradient-overlay mask"></figure>
     </div>
 
-    <img id="imgLoader" style="width: auto; height: 250px; visibility: hidden;">
+    <img id="imgLoader" style="width: auto; height: 250px; visibility: visible;">
 
-    <canvas id="canvasProcessor" width="500px" height="500px" style="border: 1px solid #000000; float: right; visibility: hidden;"></canvas>
-    <canvas id="canvasResult" width="500px" height="500px" style="border: 1px solid #000000; float: right; visibility: hidden;"></canvas>
+    <canvas id="canvasProcessor" width="500px" height="500px"
+      style="border: 1px solid #000000; float: right; visibility: visible;"></canvas>
+    <canvas id="canvasResult" width="500px" height="500px"
+      style="border: 1px solid #000000; float: right; visibility: visible"></canvas>
 
-    <canvas id="renderCanvas" width="500px" height="500px" style="border: 1px solid #000000; float: right;"></canvas> 
+    <canvas id="renderCanvas" width="500px" height="500px" style="border: 1px solid #000000; float: right;"></canvas>
 
   </div>
 
