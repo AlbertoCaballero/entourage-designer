@@ -245,14 +245,6 @@ export class ViewboxComponent implements OnInit {
     context.filter = 'saturate(0%) contrast(2500%) brightness(25%)';
     context.drawImage(image, 0, 0, image.width, image.height);
 
-    /**
-     * <figure id="gradient-overlay" class="gradient-overlay mask2"></figure>
-    <figure id="gradient-overlay-2" class="gradient-overlay mask2"></figure>
-
-    <figure id="gradient-overlay-sec" class="gradient-overlay mask"></figure>
-    <figure id="gradient-overlay-sec-2" class="gradient-overlay mask"></figure>
-     */
-
     //Set the mask property to the newly created masking image
   }
 

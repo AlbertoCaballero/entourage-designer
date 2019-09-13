@@ -21,6 +21,7 @@
     <input type="text" id="imgurl" class="text-input" placeholder="Image URL" (input)="imgsrc=$event.target.value">
     <input type="button" class="imgbutton" value="Find" (click)="changeImage()">
   </div>
+
   <div class="character-properties-container">
     Brightness <input type="number" id="bright-number" min="0" step="0.01" (input)="brightNum=$event.target.value"
       style="width: 50px; height: 20px;" value={{brightNum}}><br>
@@ -36,6 +37,7 @@
   <div class="shadow-properties-container">
     Opacity: {{opacityNum}}<br><input type="range" id="opacity-number" min="0" max="100" step="1"
       (input)="opacityNum=$event.target.value" class="range-shadow" value={{opacityNum}}><br>
+
     Blur: {{blurNum}}<br><input type="range" id="blur-number" min="0" max="50" step="1"
       (input)="blurNum=$event.target.value" class="range-shadow" value={{blurNum}}><br>
   </div>
@@ -51,7 +53,6 @@
   <input type="button" class="" value="render" (click)="renderMasks()">
 
   -->
-
 
   <p>
     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde voluptas sint voluptates quibusdam deleniti iste

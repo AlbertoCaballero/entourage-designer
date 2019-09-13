@@ -19,6 +19,26 @@ h2 {
     float: right;
 }
 
+.imgbutton {
+  width: 20%;
+  height: 34px;
+  margin: 0;
+  color: white;
+  border-width: 0px;
+  background-color: rgb(170, 170, 170);
+  margin: 0;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.text-input {
+  width: 70%;
+  height: 30px;
+  margin: 0;
+  border-radius: 5px 0 0 5px;
+  border-width: 1px;
+}
+
 .viewbox {
     width: 100vw;
     height: 60vh;
@@ -45,7 +65,7 @@ h2 {
     }
 
     .button {
-      position: sticky; width: inherit; bottom: 0px; margin-bottom: 5px; z-index: 20; background-color: white;
+      position: sticky; width: inherit; bottom: 0px; margin-bottom: 0; z-index: 20; background-color: white;
     }
 }
 
@@ -56,12 +76,6 @@ h2 {
 
 .adjust-controlers::-webkit-scrollbar {
   width: 0;
-}
-
-.text-input {
-    width: 70%;
-    height: 30px;
-    margin: 10px 0px;
 }
 
 .imgbtn {
@@ -110,6 +124,7 @@ h2 {
     width: 80px;
     height: 80px;
     background-color: rgb(206, 206, 206);
+    margin: 15px 0;
     cursor: pointer;
 }
 
@@ -129,9 +144,9 @@ h2 {
 }
 
 .character-properties-container, .shadow-properties-container {
-    line-height: 40px; 
-    text-align: right; 
-    padding: 0 60px;
+    line-height: 40px;
+    text-align: center; 
+    padding: 0 30px;
     text-align: center;
 }
 
