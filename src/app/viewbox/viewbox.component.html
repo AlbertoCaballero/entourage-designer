@@ -13,13 +13,14 @@
   <b>Character:</b>
   <div style="text-align: center; height: auto; padding: 0 37%">
       <div class="caracter-selection-container">
+        <input type="file" id="file-input" (input)="imgsrc=$event.target.value">
         <img src="../../assets/images/Student.png" class="caracter-selection" id="caracter-selection">
       </div>
   </div>
 
   <div style="display: inline-block; margin-bottom: 15px;">
-    <input type="text" id="imgurl" class="text-input" placeholder="Image URL" (input)="imgsrc=$event.target.value">
-    <input type="button" class="imgbutton" value="Find" (click)="changeImage()">
+    <input type="text" id="imgurl" class="text-input" placeholder="Image URL" (input)="imgsrc=$event.target.value" value="{{imgsrc}}">
+    <input type="button" class="imgbutton" value="Load" (click)="changeImage()">
   </div>
 
   <div class="character-properties-container">
@@ -43,26 +44,13 @@
   </div>
 
   <!--
-    Translate:<br>
-    X: <input type="range" id="translate-x" class="sliders" min="-900" max="900" step="1" (input)="translatex=$event.target.value"><br>
-    Y: <input type="range" id="translate-y" class="sliders" min="-900" max="900" step="1" (input)="translatey=$event.target.value"><br>
-  
-
   <input type="button" class="imgbtn" value="Render" (click)="canvasRendering()">
   <input type="button" class="imgbtn" value="Image" (click)="imageRendering()">
   <input type="button" class="" value="render" (click)="renderMasks()">
-
   -->
 
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde voluptas sint voluptates quibusdam deleniti iste
-    possimus nobis tempore in nisi deserunt ratione placeat, fugiat incidunt enim, facere aspernatur tempora quaerat?
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad praesentium dolorem ab distinctio impedit. Corrupti,
-    optio. Eveniet cupiditate vel, sed nisi voluptatem aut atque distinctio laudantium, molestias nemo ipsam modi!
-  </p>
-
   <div class="button">
-    <input type="button" value="Export" class="imgbtn" (click)="render()">
+    <input type="button" value="Export" class="imgbtn" (click)="renderMasks()">
   </div>
 </div>
 
@@ -75,7 +63,7 @@
 
     <img id="shadow" src="../../assets/images/Student.png">
 
-    <div style="visibility: hidden">
+    <div style="visibility: visible">
       <figure id="gradient-overlay" class="gradient-overlay mask2"></figure>
       <figure id="gradient-overlay-2" class="gradient-overlay mask2"></figure>
 

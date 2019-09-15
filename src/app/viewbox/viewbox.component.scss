@@ -65,7 +65,7 @@ h2 {
     }
 
     .button {
-      position: sticky; width: inherit; bottom: 0px; margin-bottom: 0; z-index: 20; background-color: white;
+      position: sticky; width: inherit; bottom: 0px; margin-bottom: 0px; z-index: 20; background-color: white;
     }
 }
 
@@ -79,14 +79,14 @@ h2 {
 }
 
 .imgbtn {
-    width: 80%;
-    height: 30px;
-    margin: 0px 5px;
-    color: white;
-    border-width: 0px;
-    border-radius: 15px;
-    background-color: #2F80ED;
-    margin: 15px;
+  width: 80%;
+  height: 30px;
+  margin: 0px 5px;
+  color: white;
+  border-width: 0px;
+  border-radius: 15px;
+  background-color: #2F80ED;
+  margin: 15px;
 }
 
 .imgbtn:hover {
@@ -202,6 +202,16 @@ h2 {
     width: 80vh;
     margin: 45vh -35vh 0 0;
     z-index: 15;
+}
+
+#file-input {
+  height: 80px;
+  width: 80px;
+  background-color: red;
+  cursor: pointer;
+  position: absolute;
+  left: 37%;
+  opacity: 0;
 }
 
 //Slider customization

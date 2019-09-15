@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EntourageDesigner } from '../../assets/classes/EntourageDesigner';
+import { Observable, Observer } from 'rxjs';
 
 @Component({
   selector: 'app-viewbox',
@@ -8,9 +9,6 @@ import { EntourageDesigner } from '../../assets/classes/EntourageDesigner';
 })
 
 export class ViewboxComponent implements OnInit {
-  //EntourageDesigner class instance for process handleing
-  designer: EntourageDesigner;
-
   //Image source - Defaults to a student image
   imgsrc: string = "../../assets/images/Student.png";
 
@@ -34,7 +32,11 @@ export class ViewboxComponent implements OnInit {
   scaley: number = 0;
   xval: number = 0;
 
-//CONSTRUCTOR AND LIFE HOOKS////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //CONSTRUCTOR AND LIFE HOOKS////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  //Executes before showing anything
   constructor() { }
 
   //Executed before showing anything
@@ -44,9 +46,10 @@ export class ViewboxComponent implements OnInit {
 
     document.getElementById("image-top").style.filter = `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
 
+    //document.getElementById("file-input").addEventListener('change', this.changeImageLocal, false);
     //Loads an image to the canvas
     //this.canvasRendering();
-    
+
     //var context = canvas.getContext('2D');
   }
 
@@ -56,7 +59,9 @@ export class ViewboxComponent implements OnInit {
     this.updateComponents();
   }
 
-//UTILITARIAN METHODS///////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //UTILITARIAN METHODS///////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //This method habdles the DOM updating process
   updateComponents() {
@@ -102,6 +107,22 @@ export class ViewboxComponent implements OnInit {
 
   //Retrives an loads the URL defined by the user
   changeImage() {
+
+    console.log(this.imgsrc);
+
+    let image = new Image();
+    image.crossOrigin = 'Anonymous';
+    image.src = this.imgsrc;
+
+    var loader = document.getElementById("imgLoader");
+    loader.setAttribute("src", image.src);
+
+    this.getBase64ImageFromURL(image.src).subscribe(base64data => {    
+      console.log(base64data);
+      // this is the image as dataUrl
+      this.imgsrc = 'data:image/png;base64,' + base64data;
+    });
+
     if (this.imgsrc != null) {
       document.getElementById("shadow").setAttribute("src", `${this.imgsrc}`);
       document.getElementById("image-top").setAttribute("src", `${this.imgsrc}`);
@@ -109,6 +130,11 @@ export class ViewboxComponent implements OnInit {
     } else {
       alert("You need an image URL!");
     }
+
+  }
+
+  changeImageLocal() {
+    console.log("Change Image Local Works!");
   }
 
   //Calculates tha percentage at wich the lighting should be
@@ -145,7 +171,7 @@ export class ViewboxComponent implements OnInit {
     var img = new Image();
 
     //This gets executed when the image is loaded
-    img.onload = function() {
+    img.onload = function () {
       canvas.width = img.width;
       canvas.height = img.height;
       context.drawImage(img, 0, 0, img.width, img.height);
@@ -159,17 +185,17 @@ export class ViewboxComponent implements OnInit {
     var data = imgData.data;
 
     //Runs through the image data and changes its values to 0 if the pixel is not black
-    for(var i = 0; i < data.length; i+=4) {
-      if(data[i]==0 && data[i+1]==0 && data[i+2]==0){
-        imgData.data[i+3]=0;
+    for (var i = 0; i < data.length; i += 4) {
+      if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 0) {
+        imgData.data[i + 3] = 0;
       }
     }
 
     //Get a reference to another canvas that will be used to display the result
     var canvasResult = <HTMLCanvasElement>document.getElementById('canvasResult');
     var contextResult = canvasResult.getContext('2d');
-      canvasResult.width = canvas.width;
-      canvasResult.height = canvas.height;
+    canvasResult.width = canvas.width;
+    canvasResult.height = canvas.height;
 
     //Loads the resulting image to the new canvas
     contextResult.putImageData(imgData, 0, 0);
@@ -185,7 +211,7 @@ export class ViewboxComponent implements OnInit {
     var img = new Image();
 
     //This gets executed when the image is loaded
-    img.onload = function() {
+    img.onload = function () {
       canvas.width = img.width;
       canvas.height = img.height;
       context.drawImage(img, 0, 0, img.width, img.height);
@@ -199,17 +225,17 @@ export class ViewboxComponent implements OnInit {
     var data = imgData.data;
 
     //Runs through the image data and changes its values to 0 if the pixel is not black
-    for(var i = 0; i < data.length; i+=4) {
-      if(data[i]!=0 && data[i+1]!=0 && data[i+2]!=0){
-        imgData.data[i+3]=0;
+    for (var i = 0; i < data.length; i += 4) {
+      if (data[i] != 0 && data[i + 1] != 0 && data[i + 2] != 0) {
+        imgData.data[i + 3] = 0;
       }
     }
 
     //Get a reference to another canvas that will be used to display the result
     var canvasResult = <HTMLCanvasElement>document.getElementById(`canvasResult`);
     var contextResult = canvasResult.getContext('2d');
-      canvasResult.width = canvas.width;
-      canvasResult.height = canvas.height;
+    canvasResult.width = canvas.width;
+    canvasResult.height = canvas.height;
 
     //Loads the resulting image to the new canvas
     contextResult.putImageData(imgData, 0, 0);
@@ -225,11 +251,48 @@ export class ViewboxComponent implements OnInit {
     var loader = document.getElementById("imgLoader");
     loader.setAttribute("src", image.src);
 
+    console.log(image.src);
+
     //Set the images as masks
     document.getElementById("gradient-overlay").style.maskImage = image.src;
     document.getElementById("gradient-overlay-2").style.maskImage = image.src;
     document.getElementById("gradient-overlay-sec").style.maskImage = image.src;
     document.getElementById("gradient-overlay-sec-2").style.maskImage = image.src;
+  }
+
+  getBase64ImageFromURL(url: string) {
+    return Observable.create((observer: Observer<string>) => {
+      // create an image object
+      let img = new Image();
+      img.crossOrigin = 'Anonymous';
+      img.src = url;
+      if (!img.complete) {
+        // This will call another method that will create image from url
+        img.onload = () => {
+          observer.next(this.getBase64Image(img));
+          observer.complete();
+        };
+        img.onerror = (err) => {
+          observer.error(err);
+        };
+      } else {
+        observer.next(this.getBase64Image(img));
+        observer.complete();
+      }
+    });
+  }
+
+  getBase64Image(img: HTMLImageElement) {
+    // We create a HTML canvas object that will create a 2d image
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    // This will draw image    
+    ctx.drawImage(img, 0, 0);
+    // Convert the drawn image to Data URL
+    var dataURL = canvas.toDataURL("image/png");
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
 
   //Process and applies filter for the masking creation
@@ -238,7 +301,7 @@ export class ViewboxComponent implements OnInit {
     const canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
     const context = canvas.getContext('2d');
     const image = <any>document.getElementById('image-top');
-    
+
     canvas.height = image.height;
     canvas.width = image.width;
 
@@ -246,10 +309,19 @@ export class ViewboxComponent implements OnInit {
     context.drawImage(image, 0, 0, image.width, image.height);
 
     //Set the mask property to the newly created masking image
+    //const result = <HTMLCanvasElement>document.getElementById('canvasResult');
+    //const resultContext = result.getContext('2d');
+    //resultContext.drawImage(image, 0, 0, image.width, image.height);
   }
 
   //Render final image. TODO: It has to render to PSD and PNG
-  render() {
-    console.log("Still working on it");
+  renderFromCanvas() {
+    console.log("Reading canvas and building image");
+
+    //The idea is to take the current parameters and load them into a canvas, then render this canvas to get a PNG file.
+    const chr = document.getElementById("gradient-overlay-sec");
+    console.log(chr.style.mask);
+
+    //For the PSD file there is no easy way yet, research in progress.
   }
 }
