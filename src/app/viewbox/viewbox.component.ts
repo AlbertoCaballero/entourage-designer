@@ -10,6 +10,7 @@ import { Observable, Observer } from 'rxjs';
 export class ViewboxComponent implements OnInit {
   //Image source - Defaults to a student image
   imgsrc: string = "../../assets/images/Student.png";
+  imageLocal : File;
 
   //The parameters that will be updated
   rangex: number = -70;
@@ -45,11 +46,7 @@ export class ViewboxComponent implements OnInit {
 
     document.getElementById("image-top").style.filter = `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
 
-    //document.getElementById("file-input").addEventListener('change', this.changeImageLocal, false);
-    //Loads an image to the canvas
-    //this.canvasRendering();
-
-    //var context = canvas.getContext('2D');
+    document.getElementById("file-input").addEventListener('change', this.fileInput, false);
   }
 
   //Every time something changes this gets executed. First I need to change the values using the input.
@@ -133,7 +130,46 @@ export class ViewboxComponent implements OnInit {
   }
 
   changeImageLocal() {
-    console.log("Change Image Local Works!");
+    console.log("Changing for a local file");
+
+    //Since we are only reading one file, we dont need to loop the array
+    var file = this.imageLocal[0];
+
+    //With this line we know the file type of the file
+    console.log("Source: " + file.type);
+
+    //We need to make sure the file is of type image
+    if(file.type.match('image/png')){
+      //File reader instance
+      var reader = new FileReader();
+
+      //Closure to capture the file when loaded
+      reader.onload = (function(tf){
+        return function(e) {
+          //Here we change the images we want in the editor
+          document.getElementById("shadow").setAttribute("src", `${e.target.result}`);
+          document.getElementById("image-top").setAttribute("src", `${e.target.result}`);
+          document.getElementById("caracter-selection").setAttribute("src", `${e.target.result}`);
+
+          console.log(tf.name);
+
+          //Save the image to local storage
+          localStorage.setItem('img', e.target.result);
+        };
+      })(file);
+
+      //Now we read the file
+      reader.readAsDataURL(file);
+
+    } else {
+      alert("Wrong file type");
+    }
+  }
+
+  fileInput(event) {
+    console.log("Is executing " + event.type);
+    this.imgsrc = event.target.files[0].name;
+    console.log(this.imgsrc);
   }
 
   //Calculates tha percentage at wich the lighting should be

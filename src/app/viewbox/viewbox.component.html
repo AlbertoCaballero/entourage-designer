@@ -13,14 +13,14 @@
   <b>Character:</b>
   <div style="text-align: center; height: auto; padding: 0 37%">
       <div class="caracter-selection-container">
-        <input type="file" id="file-input" (input)="imgsrc=$event.target.value">
-        <img src="../../assets/images/Student.png" class="caracter-selection" id="caracter-selection">
+        <input type="file" id="file-input" (input)="imageLocal=$event.target.files">
+        <img src="{{imgsrc}}" class="caracter-selection" id="caracter-selection">
       </div>
   </div>
 
   <div style="display: inline-block; margin-bottom: 15px;">
-    <input type="text" id="imgurl" class="text-input" placeholder="Image URL" (input)="imgsrc=$event.target.value" value="{{imgsrc}}">
-    <input type="button" class="imgbutton" value="Load" (click)="changeImage()">
+    <input type="text" id="imgurl" class="text-input" placeholder="Image URL" value="{{imgsrc}}">
+    <input type="button" class="imgbutton" value="Load" (click)="changeImageLocal()">
   </div>
 
   <div class="character-properties-container">
@@ -59,9 +59,9 @@
   <!--Here goes the canvas and all the other good stuf-->
   <div class="image-area">
 
-    <img id="image-top" src="../../assets/images/Student.png">
+    <img id="image-top" src="{{imgsrc}}">
 
-    <img id="shadow" src="../../assets/images/Student.png">
+    <img id="shadow" src="{{imgsrc}}">
 
     <div style="visibility: visible">
       <figure id="gradient-overlay" class="gradient-overlay mask2"></figure>
