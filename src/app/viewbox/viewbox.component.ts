@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EntourageDesigner } from '../../assets/classes/EntourageDesigner';
 import { Observable, Observer } from 'rxjs';
 
 @Component({
