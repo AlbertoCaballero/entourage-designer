@@ -166,10 +166,18 @@ export class ViewboxComponent implements OnInit {
     }
   }
 
+  //Handles the event listener for file input
   fileInput(event) {
+    //Show the evet type of the listener
     console.log("Is executing " + event.type);
+
+    //Shows the name of the selected file
     this.imgsrc = event.target.files[0].name;
     console.log(this.imgsrc);
+
+    //Changes the value of the text field for the name of the selected file
+    var textfield : any = document.getElementById("imgurl");
+    textfield.value = this.imgsrc;
   }
 
   //Calculates tha percentage at wich the lighting should be
