@@ -129,6 +129,7 @@ export class ViewboxComponent implements OnInit {
 
   }
 
+  //Loads the current file selected in the file input
   changeImageLocal() {
     console.log("Changing for a local file");
 
@@ -365,6 +366,6 @@ export class ViewboxComponent implements OnInit {
     const chr = document.getElementById("gradient-overlay-sec");
     console.log(chr.style.mask);
 
-    //For the PSD file there is no easy way yet, research in progress.
+    //For the PSD file there is no easy way yet, research in progress. Looks like a PSD.JS library may do what I need.
   }
 }
