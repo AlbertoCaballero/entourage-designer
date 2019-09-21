@@ -9,7 +9,7 @@ import { Observable, Observer } from 'rxjs';
 
 export class ViewboxComponent implements OnInit {
   //Image source - Defaults to a student image
-  imgsrc: string = "../../assets/images/Student.png";
+  imgsrc: string = "assets/images/Student.png";
   imageLocal : File;
 
   //The parameters that will be updated
@@ -42,6 +42,7 @@ export class ViewboxComponent implements OnInit {
   //Executed before showing anything
   ngOnInit() {
     document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
+    
     document.getElementById("gradient-overlay").style.filter = `brightness(100%) blur(50px) opacity(30%)`;
 
     document.getElementById("image-top").style.filter = `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
@@ -103,7 +104,6 @@ export class ViewboxComponent implements OnInit {
 
   //Retrives an loads the URL defined by the user
   changeImage() {
-
     console.log(this.imgsrc);
 
     let image = new Image();
@@ -126,7 +126,6 @@ export class ViewboxComponent implements OnInit {
     } else {
       alert("You need an image URL!");
     }
-
   }
 
   //Loads the current file selected in the file input
@@ -206,9 +205,9 @@ export class ViewboxComponent implements OnInit {
   }
 
   //Canavas image processing for light zones
-  canvasRendering() {
-    //Retrive the reference to the onject that we are gona modify
-    const canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
+  canvasRendering(procesor : string = 'canvasProcessor', result : string = 'canvasResult') {
+    //Retrive the reference to the object that we are going to modify
+    const canvas = <HTMLCanvasElement>document.getElementById(procesor);
     const context = canvas.getContext('2d');
 
     //Instance of an image object
@@ -224,7 +223,7 @@ export class ViewboxComponent implements OnInit {
     //This is when we load the image, the onload function will get executed after
     img.src = this.imgsrc;
 
-    //Load an object with the array of pixel in the canvas
+    //Load an object with the array of pixel data in the canvas
     var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
     var data = imgData.data;
 
@@ -236,7 +235,7 @@ export class ViewboxComponent implements OnInit {
     }
 
     //Get a reference to another canvas that will be used to display the result
-    var canvasResult = <HTMLCanvasElement>document.getElementById('canvasResult');
+    var canvasResult = <HTMLCanvasElement>document.getElementById(result);
     var contextResult = canvasResult.getContext('2d');
     canvasResult.width = canvas.width;
     canvasResult.height = canvas.height;
@@ -246,9 +245,9 @@ export class ViewboxComponent implements OnInit {
   }
 
   //Canavas image processing for dark zones
-  notCanvasRendering() {
+  notCanvasRendering(procesor : string = 'canvasProcessor', result : string = 'canvasResult') {
     //Retrive the reference to the onject that we are gona modify
-    const canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
+    const canvas = <HTMLCanvasElement>document.getElementById(procesor);
     const context = canvas.getContext('2d');
 
     //Instance of an image object
@@ -276,7 +275,7 @@ export class ViewboxComponent implements OnInit {
     }
 
     //Get a reference to another canvas that will be used to display the result
-    var canvasResult = <HTMLCanvasElement>document.getElementById(`canvasResult`);
+    var canvasResult = <HTMLCanvasElement>document.getElementById(result);
     var contextResult = canvasResult.getContext('2d');
     canvasResult.width = canvas.width;
     canvasResult.height = canvas.height;
@@ -332,8 +331,10 @@ export class ViewboxComponent implements OnInit {
     canvas.width = img.width;
     canvas.height = img.height;
     var ctx = canvas.getContext("2d");
+
     // This will draw image    
     ctx.drawImage(img, 0, 0);
+
     // Convert the drawn image to Data URL
     var dataURL = canvas.toDataURL("image/png");
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
@@ -349,9 +350,11 @@ export class ViewboxComponent implements OnInit {
     canvas.height = image.height;
     canvas.width = image.width;
 
-    context.filter = 'saturate(0%) contrast(2500%) brightness(25%)';
+    context.filter = 'brightness(80%) saturate(0%) contrast(500%)';
     context.drawImage(image, 0, 0, image.width, image.height);
 
+    //this.canvasRendering();
+    //this.notCanvasRendering();
     //Set the mask property to the newly created masking image
     //const result = <HTMLCanvasElement>document.getElementById('canvasResult');
     //const resultContext = result.getContext('2d');
@@ -359,11 +362,11 @@ export class ViewboxComponent implements OnInit {
   }
 
   //Render final image. TODO: It has to render to PSD and PNG
-  renderFromCanvas() {
-    console.log("Reading canvas and building image");
+  renderFromCanvas(id : string) {
+    console.log("Reading canvas and building image from" + id);
 
     //The idea is to take the current parameters and load them into a canvas, then render this canvas to get a PNG file.
-    const chr = document.getElementById("gradient-overlay-sec");
+    const chr = document.getElementById(id);
     console.log(chr.style.mask);
 
     //For the PSD file there is no easy way yet, research in progress. Looks like a PSD.JS library may do what I need.
