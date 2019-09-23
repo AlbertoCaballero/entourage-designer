@@ -353,11 +353,8 @@ export class ViewboxComponent implements OnInit {
     context.filter = 'brightness(80%) saturate(0%) contrast(500%)';
     context.drawImage(image, 0, 0, image.width, image.height);
 
-    //this.canvasRendering();
-    //this.notCanvasRendering();
-    //Set the mask property to the newly created masking image
-    //const result = <HTMLCanvasElement>document.getElementById('canvasResult');
-    //const resultContext = result.getContext('2d');
+    //this.canvasRendering();//this.notCanvasRendering();//Set the mask property to the newly created masking image
+    //const result = <HTMLCanvasElement>document.getElementById('canvasResult');//const resultContext = result.getContext('2d');
     //resultContext.drawImage(image, 0, 0, image.width, image.height);
   }
 
@@ -368,6 +365,7 @@ export class ViewboxComponent implements OnInit {
     //The idea is to take the current parameters and load them into a canvas, then render this canvas to get a PNG file.
     const chr = document.getElementById(id);
     console.log(chr.style.mask);
+    console.log(id);
 
     //For the PSD file there is no easy way yet, research in progress. Looks like a PSD.JS library may do what I need.
   }
