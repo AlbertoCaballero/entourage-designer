@@ -67,35 +67,35 @@ export class ViewboxComponent implements OnInit {
     this.scaley = this.rangey;
 
     this.xval = (250 * (Math.tan(this.skewx * 0.0174533))) / 2;
+    
     this.translatex = this.xval - (this.xval * (1 - this.scaley));
-
     this.translatey = (250 * (1 - this.scaley)) / 2;
 
     //Update shadow properties
     document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
-
     //Update character in viewbox properties
     document.getElementById("image-top").style.filter = `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
+
 
     //Applies the new values for the shadow
     document.getElementById("shadow").style.transform =
       `translateY(${this.translatey}px) skewX(${this.skewx}deg) translateX(${-this.translatex}px) scaleY(${this.scaley})`;
 
+
     //Modify gradient overlay properties
     document.getElementById("gradient-overlay").style.background =
       `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.notColorByHeight(this.scaley)}) 
       ${this.calculateLighting(this.skewx)}%, rgba(255,255,255,0) 100%)`;
-
     //Modify gradient overlay 2 properties
     document.getElementById("gradient-overlay-2").style.background =
       `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.notColorByHeight(this.scaley)}) 
       ${this.calculateLighting(this.skewx)}%, rgba(0,0,0,0) 100%)`;
 
+
     //Modify gradient overlay properties for the alternative
     document.getElementById("gradient-overlay-sec").style.background =
       `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) 
       ${this.calculateLighting(this.skewx)}%, rgba(255,255,255,0) 100%)`;
-
     //Modify gradient overlay 2 properties for the alternative
     document.getElementById("gradient-overlay-sec-2").style.background =
       `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) 

@@ -19,7 +19,7 @@
   </div>
 
   <div style="display: inline-block; margin-bottom: 15px;">
-    <input type="text" id="imgurl" class="text-input" placeholder="Image URL" value="{{imgsrc}}">
+    <input type="text" id="imgurl" class="text-input" placeholder="Image URL" disabled value="{{imgsrc}}">
     <input type="button" class="imgbutton" value="Load" (click)="changeImageLocal()">
   </div>
 
@@ -45,6 +45,14 @@
 
   <div class="button">
     <input type="button" value="Export" class="imgbtn" (click)="renderMasks()">
+  </div>
+
+  <div>
+    skewx: {{skewx}}<br>
+    scaley: {{scaley}}<br>
+    xval: {{xval}}<br>
+    translatex: {{translatex}}<br>
+    translatey: {{translatey}}<br><br>
   </div>
 </div>
 
