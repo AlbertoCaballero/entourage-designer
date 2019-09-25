@@ -162,7 +162,7 @@ export class ViewboxComponent implements OnInit {
       reader.readAsDataURL(file);
 
     } else {
-      alert("Wrong file type");
+      alert("Wrong file type: Only PNG and JPEG allowed.");
     }
   }
 
