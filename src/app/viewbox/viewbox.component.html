@@ -24,12 +24,14 @@
   </div>
 
   <div class="character-properties-container">
-    Brightness <input type="number" id="bright-number" min="0" step="0.01" (input)="brightNum=$event.target.value"
-      style="width: 50px; height: 20px;" value={{brightNum}}><br>
-    Contrast <input type="number" id="cont-number" min="0" step="0.01" (input)="contNum=$event.target.value"
-      style="width: 50px; height: 20px;" value={{contNum}}><br>
-    Saturation <input type="number" id="sat-number" min="0" step="0.01" (input)="satNum=$event.target.value"
-      style="width: 50px; height: 20px;" value={{satNum}}><br>
+    Brightness<input type="range" id="bright-number" min="0" max="5" step="0.1" (input)="brightNum=$event.target.value"
+      style="width: inherit; height: 10px;" value={{brightNum}}>
+
+    Contrast<input type="range" id="cont-number" min="0" max="5" step="0.1" (input)="contNum=$event.target.value"
+      style="width: inherit; height: 10px;" value={{contNum}}>
+
+    Saturation<input type="range" id="sat-number" min="0" max="5" step="0.1" (input)="satNum=$event.target.value"
+      style="width: inherit; height: 10px;" value={{satNum}}>
   </div>
 
   <br><br>
