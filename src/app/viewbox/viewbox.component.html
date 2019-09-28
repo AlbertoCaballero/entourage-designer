@@ -24,13 +24,13 @@
   </div>
 
   <div class="character-properties-container">
-    Brightness<input type="range" id="bright-number" min="0" max="5" step="0.1" (input)="brightNum=$event.target.value"
+    Brightness: {{brightNum}}<input type="range" id="bright-number" min="0" max="5" step="0.01" (input)="brightNum=$event.target.value"
       style="width: 210px; height: 10px;" value={{brightNum}} class="control-sliders">
 
-    Contrast<input type="range" id="cont-number" min="0" max="5" step="0.1" (input)="contNum=$event.target.value"
+    Contrast: {{contNum}}<input type="range" id="cont-number" min="0" max="5" step="0.01" (input)="contNum=$event.target.value"
       style="width: 210px; height: 10px;" value={{contNum}} class="control-sliders">
 
-    Saturation<input type="range" id="sat-number" min="0" max="5" step="0.1" (input)="satNum=$event.target.value"
+    Saturation: {{satNum}}<input type="range" id="sat-number" min="0" max="5" step="0.01" (input)="satNum=$event.target.value"
       style="width: 210px; height: 10px;" value={{satNum}} class="control-sliders">
   </div>
 
