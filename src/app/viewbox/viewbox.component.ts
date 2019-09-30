@@ -43,6 +43,14 @@ export class ViewboxComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       let urlParam = params['imgurl'];
       console.log(urlParam);
+      if (urlParam != null) {
+        console.log(urlParam);
+        this.imgsrc = urlParam;
+
+      } else {
+        console.log("No url param specified");
+        this.imgsrc = "assets/images/Student.png";
+      }
     });
   }
 
