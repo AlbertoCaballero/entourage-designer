@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import { Observable, Observer } from 'rxjs';
 
 @Component({
@@ -37,7 +38,13 @@ export class ViewboxComponent implements OnInit {
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //Executes before showing anything
-  constructor() { }
+  constructor(private activatedRoute : ActivatedRoute) { 
+    //Retrives the url parameter and logs to the console
+    this.activatedRoute.queryParams.subscribe(params => {
+      let urlParam = params['imgurl'];
+      console.log(urlParam);
+    });
+  }
 
   //Executed before showing anything
   ngOnInit() {
