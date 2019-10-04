@@ -38,7 +38,7 @@ export class ViewboxComponent implements OnInit {
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //Executes before showing anything
-  constructor(private activatedRoute : ActivatedRoute) { 
+  constructor(private activatedRoute : ActivatedRoute) {
     //Retrives the url parameter and logs to the console
     this.activatedRoute.queryParams.subscribe(params => {
       let urlParam = params['imgurl'];
@@ -57,7 +57,7 @@ export class ViewboxComponent implements OnInit {
   //Executed before showing anything
   ngOnInit() {
     document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
-    
+
     document.getElementById("gradient-overlay").style.filter = `brightness(100%) blur(50px) opacity(30%)`;
 
     document.getElementById("image-top").style.filter = `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
@@ -82,7 +82,7 @@ export class ViewboxComponent implements OnInit {
     this.scaley = this.rangey;
 
     this.xval = (250 * (Math.tan(this.skewx * 0.0174533))) / 2;
-    
+
     this.translatex = this.xval - (this.xval * (1 - this.scaley));
     this.translatey = (250 * (1 - this.scaley)) / 2;
 
@@ -99,21 +99,21 @@ export class ViewboxComponent implements OnInit {
 
     //Modify gradient overlay properties
     document.getElementById("gradient-overlay").style.background =
-      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.notColorByHeight(this.scaley)}) 
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.notColorByHeight(this.scaley)})
       ${this.calculateLighting(this.skewx)}%, rgba(255,255,255,0) 100%)`;
     //Modify gradient overlay 2 properties
     document.getElementById("gradient-overlay-2").style.background =
-      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.notColorByHeight(this.scaley)}) 
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.notColorByHeight(this.scaley)})
       ${this.calculateLighting(this.skewx)}%, rgba(0,0,0,0) 100%)`;
 
 
     //Modify gradient overlay properties for the alternative
     document.getElementById("gradient-overlay-sec").style.background =
-      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) 
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)})
       ${this.calculateLighting(this.skewx)}%, rgba(255,255,255,0) 100%)`;
     //Modify gradient overlay 2 properties for the alternative
     document.getElementById("gradient-overlay-sec-2").style.background =
-      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)}) 
+      `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.colorByHeight(this.scaley)})
       ${this.calculateLighting(this.skewx)}%, rgba(0,0,0,0) 100%)`;
   }
 
@@ -128,7 +128,7 @@ export class ViewboxComponent implements OnInit {
     var loader = document.getElementById("imgLoader");
     loader.setAttribute("src", image.src);
 
-    this.getBase64ImageFromURL(image.src).subscribe(base64data => {    
+    this.getBase64ImageFromURL(image.src).subscribe(base64data => {
       console.log(base64data);
       // this is the image as dataUrl
       this.imgsrc = 'data:image/png;base64,' + base64data;
@@ -347,7 +347,7 @@ export class ViewboxComponent implements OnInit {
     canvas.height = img.height;
     var ctx = canvas.getContext("2d");
 
-    // This will draw image    
+    // This will draw image
     ctx.drawImage(img, 0, 0);
 
     // Convert the drawn image to Data URL
@@ -370,7 +370,7 @@ export class ViewboxComponent implements OnInit {
   }
 
   //Render final image. TODO: It has to render to PSD and PNG
-  renderFromCanvas(id : string) {
+  renderFromCanvas(id : string) : ImageData {
     console.log("Reading canvas and building image from " + id);
 
     //The idea is to take the current parameters and load them into a canvas, then render this canvas to get a PNG file.
@@ -378,6 +378,7 @@ export class ViewboxComponent implements OnInit {
     console.log(canvas.style.mask);
     console.log(canvas.nodeType);
 
+    return;
     //For the PSD file there is no easy way yet, research in progress. Looks like a PSD.JS library may do what I need.
   }
 }
