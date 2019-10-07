@@ -371,10 +371,12 @@ export class ViewboxComponent implements OnInit {
 
   //Render final image. TODO: It has to render to PSD and PNG
   renderFromCanvas(id : string) : ImageData {
+    //Inform on console about the process
     console.log("Reading canvas and building image from " + id);
-
+    
     //The idea is to take the current parameters and load them into a canvas, then render this canvas to get a PNG file.
     const canvas = document.getElementById(id);
+
     console.log(canvas.style.mask);
     console.log(canvas.nodeType);
 
