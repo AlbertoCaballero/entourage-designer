@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ViewboxComponent } from './viewbox/viewbox.component';
-import { PSD } from 'psd';
 
 const appRoutes : Routes = [
   { path: 'editor', component: ViewboxComponent},
@@ -18,7 +17,6 @@ const appRoutes : Routes = [
     ViewboxComponent
   ],
   imports: [
-    PSD,
     BrowserModule,
     RouterModule.forRoot(
       appRoutes//,
