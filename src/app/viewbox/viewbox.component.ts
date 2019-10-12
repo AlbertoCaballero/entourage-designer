@@ -368,6 +368,11 @@ export class ViewboxComponent implements OnInit {
 
     context.filter = 'brightness(80%) saturate(0%) contrast(500%)';
     context.drawImage(image, 0, 0, image.width, image.height);
+
+    // here is the most important part because if you dont replace you will get a DOM 18 exception.
+    var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    // it will save locally
+    window.location.href=img;
   }
 
   //Render final image. TODO: It has to render to PSD and PNG
