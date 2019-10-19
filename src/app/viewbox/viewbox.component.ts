@@ -375,6 +375,11 @@ export class ViewboxComponent implements OnInit {
     window.location.href=img;
   }
 
+  //Create a new canvas with all the properties to render
+  setUpCanvas() : HTMLCanvasElement {
+    return;
+  }
+
   //Render final image. TODO: It has to render to PSD and PNG
   renderFromCanvas(id : string) : ImageData {
     //Inform on console about the process
