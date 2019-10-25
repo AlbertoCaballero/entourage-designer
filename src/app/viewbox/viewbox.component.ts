@@ -34,6 +34,9 @@ export class ViewboxComponent implements OnInit {
   scaley: number = 0;
   xval: number = 0;
 
+  //PSD instance
+  psd : PSD;
+
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //CONSTRUCTOR AND LIFE HOOKS////////////////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,12 +60,16 @@ export class ViewboxComponent implements OnInit {
 
   //Executed before showing anything
   ngOnInit() {
+    //Sets up the shadow element
     document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
 
+    //Sets up de overlay effects
     document.getElementById("gradient-overlay").style.filter = `brightness(100%) blur(50px) opacity(30%)`;
 
+    //Sets up the instance of the choosen image
     document.getElementById("image-top").style.filter = `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
 
+    //Handdles opening files
     document.getElementById("file-input").addEventListener('change', this.fileInput, false);
   }
 
@@ -383,6 +390,10 @@ export class ViewboxComponent implements OnInit {
     const canvas = document.getElementById(id);
     console.log(canvas.style.mask);
     console.log(canvas.nodeType);
+
+    //Testing TODO: Make it work
+    this.psd.fromFile("");
+
     return;
   }
 }
