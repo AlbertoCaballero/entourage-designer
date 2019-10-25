@@ -383,5 +383,6 @@ export class ViewboxComponent implements OnInit {
     const canvas = document.getElementById(id);
     console.log(canvas.style.mask);
     console.log(canvas.nodeType);
+    return;
   }
 }
