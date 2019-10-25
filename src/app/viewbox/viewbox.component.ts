@@ -383,8 +383,5 @@ export class ViewboxComponent implements OnInit {
     const canvas = document.getElementById(id);
     console.log(canvas.style.mask);
     console.log(canvas.nodeType);
-
-    return;
-    //For the PSD file there is no easy way yet, research in progress. Looks like a PSD.JS library may do what I need.
   }
 }
