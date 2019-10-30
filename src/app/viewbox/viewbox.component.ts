@@ -363,26 +363,33 @@ export class ViewboxComponent implements OnInit {
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
 
-  //Process and applies filter for the masking creation
-  renderMasks() {
-    //Here we process the original loaded image to be black and withe and high contrast
+  //Process and applies filter for the masking creation also renders the canvas and saves it
+  renderCanvas() {
+    //Here we get reference to the canvas
     const canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
     const context = canvas.getContext('2d');
-    const image = <any>document.getElementById('image-top');
 
-    canvas.height = image.height;
-    canvas.width = image.width;
+    //Here we get reference to the character image loaded in page
+    const imageCharacter = <any>document.getElementById('image-top');
 
-    context.filter = 'brightness(80%) saturate(0%) contrast(500%)';
-    context.drawImage(image, 0, 0, image.width, image.height);
+    //Set canvas to image size
+    canvas.height = imageCharacter.height;
+    canvas.width = imageCharacter.width;
 
-    // here is the most important part because if you dont replace you will get a DOM 18 exception.
-    var img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-    // it will save locally
-    window.location.href=img;
+    //Add filters to the canvas, for now we only make it brighter
+    context.filter = 'brightness(150%)';
+
+    //Loads the image into canvas
+    context.drawImage(imageCharacter, 0, 0, imageCharacter.width, imageCharacter.height);
+
+    // Very important to replace the image, you will get a DOM 18 exception otherwise
+    var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    
+    //Now we will save it locally
+    window.location.href=image;
   }
 
-  //Render final image. TODO: It has to render to PSD and PNG
+  /*Render final image. TODO: It has to render to PSD and PNG
   renderFromCanvas(id : string) {
     //Inform on console about the process
     console.log("Reading canvas and building image from " + id);
@@ -394,5 +401,5 @@ export class ViewboxComponent implements OnInit {
    
     //Testing TODO: The library seems to work, now lets use it
     this.psd.fromFile("");
-  }
+  }*/
 }
