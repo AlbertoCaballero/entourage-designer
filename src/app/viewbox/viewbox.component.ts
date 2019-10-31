@@ -387,6 +387,8 @@ export class ViewboxComponent implements OnInit {
     
     //Now we will save it locally
     window.location.href=image;
+
+    //It will be able to save on every format
   }
 
   /*Render final image. TODO: It has to render to PSD and PNG
