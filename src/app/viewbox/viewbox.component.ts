@@ -384,11 +384,11 @@ export class ViewboxComponent implements OnInit {
 
     // Very important to replace the image, you will get a DOM 18 exception otherwise
     var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-    
+
     //Now we will save it locally
     window.location.href=image;
 
-    //It will be able to save on every format
+    //This function enables the user to save at any format
   }
 
   /*Render final image. TODO: It has to render to PSD and PNG
@@ -400,7 +400,7 @@ export class ViewboxComponent implements OnInit {
     console.log(canvas.style.mask);
     console.log(canvas.nodeType);
     console.log("Hello World");
-   
+
     //Testing TODO: The library seems to work, now lets use it
     this.psd.fromFile("");
   }*/
