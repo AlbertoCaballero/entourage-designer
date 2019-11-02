@@ -364,23 +364,26 @@ export class ViewboxComponent implements OnInit {
   }
 
   //Process and applies filter for the masking creation also renders the canvas and saves it
-  renderCanvas() {
-    //Here we get reference to the canvas
+  renderCanvas(renderX : number = 500, renderY : number = 500) {
+    //Here we get reference to the canvas and it's context
     const canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
     const context = canvas.getContext('2d');
 
     //Here we get reference to the character image loaded in page
-    const imageCharacter = <any>document.getElementById('image-top');
+    const imageCharacter = <any>document.getElementById('shadow');
 
     //Set canvas to image size
-    canvas.height = imageCharacter.height;
-    canvas.width = imageCharacter.width;
+    canvas.width = renderX;
+    canvas.height = renderY;
 
     //Add filters to the canvas, for now we only make it brighter
-    context.filter = 'brightness(150%)';
+    context.filter = 'blur(5px)';
 
     //Loads the image into canvas
     context.drawImage(imageCharacter, 0, 0, imageCharacter.width, imageCharacter.height);
+
+    //Apply modifications to the image
+    context.transform(1, 1, this.skewx, this.scaley, this.translatex, this.translatey);
 
     // Very important to replace the image, you will get a DOM 18 exception otherwise
     var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
