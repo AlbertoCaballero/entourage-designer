@@ -97,7 +97,8 @@ export class ViewboxComponent implements OnInit {
     //Update shadow properties
     document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
     //Update character in viewbox properties
-    document.getElementById("image-top").style.filter = `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
+    document.getElementById("image-top").style.filter = 
+        `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
 
 
     //Applies the new values for the shadow
@@ -205,7 +206,7 @@ export class ViewboxComponent implements OnInit {
 
   //Calculates tha percentage at wich the lighting should be
   calculateLighting(angle: number): number {
-    //The math function calculates the lighting overlay (0.5 + (angle/80)/2)*100 << TODO: Still needs calibration
+    //The math function calculates the lighting overlay (0.5 + (angle/80)/2)*100
     return (0.5 + (angle / 80) / 2) * 100;
   }
 
@@ -390,21 +391,5 @@ export class ViewboxComponent implements OnInit {
 
     //Now we will save it locally
     window.location.href=image;
-
-    //This function enables the user to save at any format
   }
-
-  /*Render final image. TODO: It has to render to PSD and PNG
-  renderFromCanvas(id : string) {
-    //Inform on console about the process
-    console.log("Reading canvas and building image from " + id);
-    //The idea is to take the current parameters and load them into a canvas, then render this canvas to get a PNG file.
-    const canvas = document.getElementById(id);
-    console.log(canvas.style.mask);
-    console.log(canvas.nodeType);
-    console.log("Hello World");
-
-    //Testing TODO: The library seems to work, now lets use it
-    this.psd.fromFile("");
-  }*/
 }
