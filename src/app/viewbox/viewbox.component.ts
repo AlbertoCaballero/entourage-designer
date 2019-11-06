@@ -377,11 +377,11 @@ export class ViewboxComponent implements OnInit {
     canvas.width = renderX;
     canvas.height = renderY;
 
-    //Add filters to the canvas, for now we only make it brighter
-    context.filter = 'blur(5px)';
-
     //Loads the image into canvas
     context.drawImage(imageCharacter, 0, 0, imageCharacter.width, imageCharacter.height);
+    
+    //Add filters to the canvas, for now we only make it brighter
+    context.filter = `translateY(${this.translatey}px) skewX(${this.skewx}deg) translateX(${-this.translatex}px) scaleY(${this.scaley})`;
 
     //Apply modifications to the image
     context.transform(1, 1, this.skewx, this.scaley, this.translatex, this.translatey);
