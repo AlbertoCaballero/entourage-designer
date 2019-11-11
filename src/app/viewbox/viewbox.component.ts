@@ -391,5 +391,7 @@ export class ViewboxComponent implements OnInit {
 
     //Now we will save it locally
     window.location.href=image;
+
+    //TODO: Find a way to translate a multi layaer canvas to .psd file
   }
 }
