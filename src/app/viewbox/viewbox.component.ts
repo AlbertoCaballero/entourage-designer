@@ -364,6 +364,10 @@ export class ViewboxComponent implements OnInit {
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
 
+  PSDbuilder() {
+    //PSD is a close source data format
+  }
+
   //Process and applies filter for the masking creation also renders the canvas and saves it
   renderCanvas(renderX : number = 500, renderY : number = 500) {
     //Here we get reference to the canvas and it's context
