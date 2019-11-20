@@ -93,7 +93,7 @@ export class ViewboxComponent implements OnInit {
     //Update shadow properties
     document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
     //Update character in viewbox properties
-    document.getElementById("image-top").style.filter = 
+    document.getElementById("image-top").style.filter =
         `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
 
 
@@ -133,7 +133,7 @@ export class ViewboxComponent implements OnInit {
     var loader = document.getElementById("imgLoader");
     loader.setAttribute("src", image.src);
 
-    this.getBase64ImageFromURL(image.src).subscribe(base64data => {
+    this.getBase64ImageFromURL(image.src).subscribe((base64data: string) => {
       console.log(base64data);
       // this is the image as dataUrl
       this.imgsrc = 'data:image/png;base64,' + base64data;
@@ -375,7 +375,7 @@ export class ViewboxComponent implements OnInit {
 
     //Loads the image into canvas
     context.drawImage(imageCharacter, 0, 0, imageCharacter.width, imageCharacter.height);
-    
+
     //Add filters to the canvas, for now we only make it brighter
     context.filter = `translateY(${this.translatey}px) skewX(${this.skewx}deg) translateX(${-this.translatex}px) scaleY(${this.scaley})`;
 
