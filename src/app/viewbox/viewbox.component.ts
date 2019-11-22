@@ -77,8 +77,7 @@ export class ViewboxComponent implements OnInit {
     this.updateComponents();
   }
 
-  //UTILITARIAN METHODS
-
+  //UTILITARIAN FUNCTIONS
   //This method habdles the DOM updating process
   updateComponents() {
     //Recalculates the values
