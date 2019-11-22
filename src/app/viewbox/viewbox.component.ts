@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { Observable, Observer } from 'rxjs';
-import { PSD } from 'psd';
 
 @Component({
   selector: 'app-viewbox',
@@ -34,11 +33,7 @@ export class ViewboxComponent implements OnInit {
   scaley: number = 0;
   xval: number = 0;
 
-  //PSD instance
-  psd : PSD;
-
   //CONSTRUCTOR AND LIFE HOOKS
-
   //Executes before showing anything
   constructor(private activatedRoute : ActivatedRoute) {
     //Retrives the url parameter and logs to the console
@@ -164,7 +159,7 @@ export class ViewboxComponent implements OnInit {
 
       //Closure to capture the file when loaded
       reader.onload = (function(tf){
-        return function(e) {
+        return function(e:any) {
           //Here we change the images we want in the editor
           document.getElementById("shadow").setAttribute("src", `${e.target.result}`);
           document.getElementById("image-top").setAttribute("src", `${e.target.result}`);
@@ -186,7 +181,7 @@ export class ViewboxComponent implements OnInit {
   }
 
   //Handles the event listener for file input
-  fileInput(event) {
+  fileInput(event:any) {
     //Show the evet type of the listener
     console.log("Is executing " + event.type);
 
