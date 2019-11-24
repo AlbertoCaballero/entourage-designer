@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ import { Observable, Observer } from 'rxjs';
 export class ViewboxComponent implements OnInit {
   //Image source - Defaults to a student image
   imgsrc: string = "assets/images/Student.png";
-  imageLocal : File;
+  imageLocal: File;
 
   //The parameters that will be updated
   rangex: number = -70;
@@ -35,7 +35,7 @@ export class ViewboxComponent implements OnInit {
 
   //CONSTRUCTOR AND LIFE HOOKS
   //Executes before showing anything
-  constructor(private activatedRoute : ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute) {
     //Retrives the url parameter and logs to the console
     this.activatedRoute.queryParams.subscribe(params => {
       let urlParam = params['imgurl'];
@@ -88,7 +88,7 @@ export class ViewboxComponent implements OnInit {
     document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
     //Update character in viewbox properties
     document.getElementById("image-top").style.filter =
-        `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
+      `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
 
 
     //Applies the new values for the shadow
@@ -153,13 +153,13 @@ export class ViewboxComponent implements OnInit {
     console.log("Source: " + file.type);
 
     //We need to make sure the file is of type image
-    if(file.type.match('image/png')){
+    if (file.type.match('image/png')) {
       //File reader instance
       var reader = new FileReader();
 
       //Closure to capture the file when loaded
-      reader.onload = (function(tf){
-        return function(e:any) {
+      reader.onload = (function (tf) {
+        return function (e: any) {
           //Here we change the images we want in the editor
           document.getElementById("shadow").setAttribute("src", `${e.target.result}`);
           document.getElementById("image-top").setAttribute("src", `${e.target.result}`);
@@ -181,7 +181,7 @@ export class ViewboxComponent implements OnInit {
   }
 
   //Handles the event listener for file input
-  fileInput(event:any) {
+  fileInput(event: any) {
     //Show the evet type of the listener
     console.log("Is executing " + event.type);
 
@@ -190,7 +190,7 @@ export class ViewboxComponent implements OnInit {
     console.log(this.imgsrc);
 
     //Changes the value of the text field for the name of the selected file
-    var textfield : any = document.getElementById("imgurl");
+    var textfield: any = document.getElementById("imgurl");
     textfield.value = this.imgsrc;
   }
 
@@ -219,7 +219,7 @@ export class ViewboxComponent implements OnInit {
   }
 
   //Canavas image processing for light zones
-  canvasRendering(procesor : string = 'canvasProcessor', result : string = 'canvasResult') {
+  canvasRendering(procesor: string = 'canvasProcessor', result: string = 'canvasResult') {
     //Retrive the reference to the object that we are going to modify
     const canvas = <HTMLCanvasElement>document.getElementById(procesor);
     const context = canvas.getContext('2d');
@@ -259,7 +259,7 @@ export class ViewboxComponent implements OnInit {
   }
 
   //Canavas image processing for dark zones
-  notCanvasRendering(procesor : string = 'canvasProcessor', result : string = 'canvasResult') {
+  notCanvasRendering(procesor: string = 'canvasProcessor', result: string = 'canvasResult') {
     //Retrive the reference to the onject that we are gona modify
     const canvas = <HTMLCanvasElement>document.getElementById(procesor);
     const context = canvas.getContext('2d');
@@ -355,7 +355,7 @@ export class ViewboxComponent implements OnInit {
   }
 
   //Process and applies filter for the masking creation also renders the canvas and saves it
-  renderCanvas(renderX : number = 500, renderY : number = 500) {
+  renderCanvas(renderX: number = 500, renderY: number = 500) {
     //Here we get reference to the canvas and it's context
     const canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
     const context = canvas.getContext('2d');
@@ -380,6 +380,6 @@ export class ViewboxComponent implements OnInit {
     var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
 
     //Now we will save it locally
-    window.location.href=image;
+    window.location.href = image;
   }
 }
