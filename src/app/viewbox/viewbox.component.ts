@@ -43,7 +43,6 @@ export class ViewboxComponent implements OnInit {
       if (urlParam != null) {
         console.log(urlParam);
         this.imgsrc = urlParam;
-
       } else {
         console.log("No url param specified");
         this.imgsrc = "assets/images/Student.png";
@@ -55,13 +54,10 @@ export class ViewboxComponent implements OnInit {
   ngOnInit() {
     //Sets up the shadow element
     document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
-
     //Sets up de overlay effects
     document.getElementById("gradient-overlay").style.filter = `brightness(100%) blur(50px) opacity(30%)`;
-
     //Sets up the instance of the choosen image
     document.getElementById("image-top").style.filter = `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
-
     //Handdles opening files
     document.getElementById("file-input").addEventListener('change', this.fileInput, false);
   }
@@ -90,11 +86,9 @@ export class ViewboxComponent implements OnInit {
     document.getElementById("image-top").style.filter =
       `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
 
-
     //Applies the new values for the shadow
     document.getElementById("shadow").style.transform =
       `translateY(${this.translatey}px) skewX(${this.skewx}deg) translateX(${-this.translatex}px) scaleY(${this.scaley})`;
-
 
     //Modify gradient overlay properties
     document.getElementById("gradient-overlay").style.background =
@@ -104,7 +98,6 @@ export class ViewboxComponent implements OnInit {
     document.getElementById("gradient-overlay-2").style.background =
       `linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(${this.notColorByHeight(this.scaley)})
       ${this.calculateLighting(this.skewx)}%, rgba(0,0,0,0) 100%)`;
-
 
     //Modify gradient overlay properties for the alternative
     document.getElementById("gradient-overlay-sec").style.background =
@@ -164,17 +157,14 @@ export class ViewboxComponent implements OnInit {
           document.getElementById("shadow").setAttribute("src", `${e.target.result}`);
           document.getElementById("image-top").setAttribute("src", `${e.target.result}`);
           document.getElementById("caracter-selection").setAttribute("src", `${e.target.result}`);
-
           console.log(tf.name);
 
           //Save the image to local storage
           localStorage.setItem('img', e.target.result);
         };
       })(file);
-
       //Now we read the file
       reader.readAsDataURL(file);
-
     } else {
       alert("Wrong file type: Only PNG and JPEG allowed.");
     }
