@@ -134,8 +134,8 @@ export class ViewboxComponent implements OnInit {
     });
 
     if (this.imgsrc != null) {
-      document.getElementById("shadow").setAttribute("src", `${this.imgsrc}`);
       document.getElementById("image-top").setAttribute("src", `${this.imgsrc}`);
+      document.getElementById("shadow").setAttribute("src", `${this.imgsrc}`);
       document.getElementById("caracter-selection").setAttribute("src", `${this.imgsrc}`);
     } else {
       alert("You need an image URL!");
