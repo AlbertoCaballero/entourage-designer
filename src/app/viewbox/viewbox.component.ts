@@ -309,7 +309,7 @@ export class ViewboxComponent implements OnInit {
 
   getBase64ImageFromURL(url: string) {
     return Observable.create((observer: Observer<string>) => {
-      // create an image object
+      // Create an image object
       let img = new Image();
       img.crossOrigin = 'Anonymous';
       img.src = url;
