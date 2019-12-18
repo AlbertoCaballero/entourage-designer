@@ -138,18 +138,14 @@ export class ViewboxComponent implements OnInit {
   //Loads the current file selected in the file input
   changeImageLocal() {
     console.log("Changing for a local file");
-
     //Since we are only reading one file, we dont need to loop the array
     var file = this.imageLocal[0];
-
     //With this line we know the file type of the file
     console.log("Source: " + file.type);
-
     //We need to make sure the file is of type image
     if (file.type.match('image/png')) {
       //File reader instance
       var reader = new FileReader();
-
       //Closure to capture the file when loaded
       reader.onload = (function (tf) {
         return function (e: any) {
@@ -158,7 +154,6 @@ export class ViewboxComponent implements OnInit {
           document.getElementById("image-top").setAttribute("src", `${e.target.result}`);
           document.getElementById("caracter-selection").setAttribute("src", `${e.target.result}`);
           console.log(tf.name);
-
           //Save the image to local storage
           localStorage.setItem('img', e.target.result);
         };
