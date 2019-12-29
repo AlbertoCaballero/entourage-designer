@@ -109,32 +109,6 @@ export class ViewboxComponent implements OnInit {
       ${this.calculateLighting(this.skewx)}%, rgba(0,0,0,0) 100%)`;
   }
 
-  //Retrives an loads the URL defined by the user
-  changeImage() {
-    console.log(this.imgsrc);
-
-    let image = new Image();
-    image.crossOrigin = 'Anonymous';
-    image.src = this.imgsrc;
-
-    var loader = document.getElementById("imgLoader");
-    loader.setAttribute("src", image.src);
-
-    this.getBase64ImageFromURL(image.src).subscribe((base64data: string) => {
-      console.log(base64data);
-      // this is the image as dataUrl
-      this.imgsrc = 'data:image/png;base64,' + base64data;
-    });
-
-    if (this.imgsrc != null) {
-      document.getElementById("image-top").setAttribute("src", `${this.imgsrc}`);
-      document.getElementById("shadow").setAttribute("src", `${this.imgsrc}`);
-      document.getElementById("caracter-selection").setAttribute("src", `${this.imgsrc}`);
-    } else {
-      alert("You need an image URL!");
-    }
-  }
-
   //Loads the current file selected in the file input
   changeImageLocal() {
     console.log("Changing for a local file");
