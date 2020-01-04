@@ -1,8 +1,13 @@
 
 //This classs handles most image manipulation and processing
 export class EntourageDesigner {
+    //Initial state for new instances
+    constructor() {
+        this.sayHello();
+    }
+
     sayHello() {
-        console.log("Hello from EntourageDesigner");
+        console.log("Hello from EntourageDesigner class");
     }
 
     //Canavas image processing

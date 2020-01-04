@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
+import { EntourageDesigner } from '../../assets/classes/EntourageDesigner';
 
 @Component({
   selector: 'app-viewbox',
@@ -9,6 +10,8 @@ import { Observable, Observer } from 'rxjs';
 })
 
 export class ViewboxComponent implements OnInit {
+  //Test designer object
+  entourage : EntourageDesigner = new EntourageDesigner();
   //Image source - Defaults to a student image
   imgsrc: string = "assets/images/Student.png";
   imageLocal: File;
