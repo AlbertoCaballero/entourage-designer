@@ -10,10 +10,13 @@ import { EntourageDesigner } from '../../assets/classes/EntourageDesigner';
 })
 
 export class ViewboxComponent implements OnInit {
-  //Test designer object
-  entourage : EntourageDesigner = new EntourageDesigner();
-  //Image source - Defaults to a student image
+  /** Test designer object */
+  EDObject : EntourageDesigner = new EntourageDesigner();
+  
+  /** Image source - Defaults to a student image */
   imgsrc: string = "assets/images/Student.png";
+  
+  /** Local File property */
   imageLocal: File;
 
   //The parameters that will be updated
@@ -25,8 +28,9 @@ export class ViewboxComponent implements OnInit {
   contNum: number = 1;
   satNum: number = 1;
 
-  //Translation values for viewbox
+  /** Translation values for viewbox X coordinates */
   movex: number = 0;
+  /** Translation values for viewbox Y coordinates */
   movey: number = 0;
 
   //Properties to change
@@ -36,8 +40,7 @@ export class ViewboxComponent implements OnInit {
   scaley: number = 0;
   xval: number = 0;
 
-  //CONSTRUCTOR AND LIFE HOOKS
-  //Executes before showing anything
+  /** Executes before showing anything */
   constructor(private activatedRoute: ActivatedRoute) {
     //Retrives the url parameter and logs to the console
     this.activatedRoute.queryParams.subscribe(params => {
@@ -53,7 +56,7 @@ export class ViewboxComponent implements OnInit {
     });
   }
 
-  //Executed before showing anything
+  /** Executed before showing anything */
   ngOnInit() {
     //Sets up the shadow element
     document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
@@ -65,14 +68,12 @@ export class ViewboxComponent implements OnInit {
     document.getElementById("file-input").addEventListener('change', this.fileInput, false);
   }
 
-  //Every time something changes this gets executed. First I need to change the values using the input.
+  /** Every time something changes this gets executed. First I need to change the values using the input. */
   ngDoCheck() {
-    //This method hadles the DOM updates
     this.updateComponents();
   }
 
-  //UTILITARIAN FUNCTIONS
-  //This method habdles the DOM updating process
+  /** This method handles the DOM updating process */
   updateComponents() {
     //Recalculates the values
     this.skewx = this.rangex;
@@ -112,7 +113,7 @@ export class ViewboxComponent implements OnInit {
       ${this.calculateLighting(this.skewx)}%, rgba(0,0,0,0) 100%)`;
   }
 
-  //Loads the current file selected in the file input
+  /** Loads the current file selected in the file input */
   changeImageLocal() {
     console.log("Changing for a local file");
     //Since we are only reading one file, we dont need to loop the array
@@ -142,7 +143,7 @@ export class ViewboxComponent implements OnInit {
     }
   }
 
-  //Handles the event listener for file input
+  /** Handles the event listener for file input */
   fileInput(event: any) {
     //Show the evet type of the listener
     console.log("Is executing " + event.type);
@@ -156,13 +157,13 @@ export class ViewboxComponent implements OnInit {
     textfield.value = this.imgsrc;
   }
 
-  //Calculates tha percentage at wich the lighting should be
+  /** Calculates tha percentage at wich the lighting should be */
   calculateLighting(angle: number): number {
     //The math function calculates the lighting overlay (0.5 + (angle/80)/2)*100
     return (0.5 + (angle / 80) / 2) * 100;
   }
 
-  //Depending on height it returns correct color
+  /** Depending on height it returns correct color */
   colorByHeight(height: number): string {
     if (height > 0) {
       return "255, 255, 255, 0.5";
@@ -171,7 +172,7 @@ export class ViewboxComponent implements OnInit {
     }
   }
 
-  //Depending on height it returns correct color but negated
+  /** Depending on height it returns correct color but negated */
   notColorByHeight(height: number): string {
     if (height > 0) {
       return "0, 0, 0, 0.5";
@@ -180,7 +181,7 @@ export class ViewboxComponent implements OnInit {
     }
   }
 
-  //Canavas image processing for light zones
+  /** Canavas image processing for light zones */
   canvasRendering(procesor: string = 'canvasProcessor', result: string = 'canvasResult') {
     //Retrive the reference to the object that we are going to modify
     const canvas = <HTMLCanvasElement>document.getElementById(procesor);
@@ -220,7 +221,7 @@ export class ViewboxComponent implements OnInit {
     contextResult.putImageData(imgData, 0, 0);
   }
 
-  //Canavas image processing for dark zones
+  /** Canavas image processing for dark zones */
   notCanvasRendering(procesor: string = 'canvasProcessor', result: string = 'canvasResult') {
     //Retrive the reference to the onject that we are gona modify
     const canvas = <HTMLCanvasElement>document.getElementById(procesor);
@@ -260,7 +261,7 @@ export class ViewboxComponent implements OnInit {
     contextResult.putImageData(imgData, 0, 0);
   }
 
-  //Renders an image loaded in a canvas to a given URL
+  /** Renders an image loaded in a canvas to a given URL */
   imageRendering() {
     var canvas = <HTMLCanvasElement>document.getElementById(`canvasResult`);
 
@@ -279,6 +280,7 @@ export class ViewboxComponent implements OnInit {
     document.getElementById("gradient-overlay-sec-2").style.maskImage = image.src;
   }
 
+  /**Gets the base 64 bit image from the given URL */
   getBase64ImageFromURL(url: string) {
     return Observable.create((observer: Observer<string>) => {
       // Create an image object
@@ -301,6 +303,7 @@ export class ViewboxComponent implements OnInit {
     });
   }
 
+  /** Gets the base 64 bit image from the given HTML element */
   getBase64Image(img: HTMLImageElement) {
     // We create a HTML canvas object that will create a 2d image
     var canvas = document.createElement("canvas");
@@ -316,7 +319,7 @@ export class ViewboxComponent implements OnInit {
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
 
-  //Process and applies filter for the masking creation also renders the canvas and saves it
+  /** Process and applies filter for the masking creation also renders the canvas and saves it */
   renderCanvas(renderX: number = 500, renderY: number = 500) {
     //Here we get reference to the canvas and it's context
     const canvas = <HTMLCanvasElement>document.getElementById('canvasProcessor');
