@@ -11,7 +11,7 @@ import { EntourageDesigner } from '../../assets/classes/EntourageDesigner';
 
 export class ViewboxComponent implements OnInit {
   /** Test designer object */
-  EDObject : EntourageDesigner = new EntourageDesigner();
+  ED : EntourageDesigner = new EntourageDesigner();
   
   /** Image source - Defaults to a student image */
   imgsrc: string = "assets/images/Student.png";
