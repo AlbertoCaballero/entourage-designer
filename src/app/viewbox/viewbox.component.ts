@@ -59,11 +59,14 @@ export class ViewboxComponent implements OnInit {
   /** Executed before showing anything */
   ngOnInit() {
     //Sets up the shadow element
-    document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
+    document.getElementById("shadow").style.filter = 
+      `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
     //Sets up de overlay effects
-    document.getElementById("gradient-overlay").style.filter = `brightness(100%) blur(50px) opacity(30%)`;
+    document.getElementById("gradient-overlay").style.filter = 
+      `brightness(100%) blur(50px) opacity(30%)`;
     //Sets up the instance of the choosen image
-    document.getElementById("image-top").style.filter = `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
+    document.getElementById("image-top").style.filter = 
+      `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
     //Handdles opening files
     document.getElementById("file-input").addEventListener('change', this.fileInput, false);
   }
@@ -85,7 +88,8 @@ export class ViewboxComponent implements OnInit {
     this.translatey = (250 * (1 - this.scaley)) / 2;
 
     //Update shadow properties
-    document.getElementById("shadow").style.filter = `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
+    document.getElementById("shadow").style.filter = 
+      `brightness(1%) blur(${this.blurNum}px) opacity(${this.opacityNum}%)`;
     //Update character in viewbox properties
     document.getElementById("image-top").style.filter =
       `brightness(${this.brightNum}) contrast(${this.contNum}) saturate(${this.satNum})`;
@@ -336,7 +340,8 @@ export class ViewboxComponent implements OnInit {
     context.drawImage(imageCharacter, 0, 0, imageCharacter.width, imageCharacter.height);
 
     //Add filters to the canvas, for now we only make it brighter
-    context.filter = `translateY(${this.translatey}px) skewX(${this.skewx}deg) translateX(${-this.translatex}px) scaleY(${this.scaley})`;
+    context.filter = 
+      `translateY(${this.translatey}px) skewX(${this.skewx}deg) translateX(${-this.translatex}px) scaleY(${this.scaley})`;
 
     //Apply modifications to the image
     context.transform(1, 1, this.skewx, this.scaley, this.translatex, this.translatey);
