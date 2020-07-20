@@ -2,7 +2,11 @@
 
 ## Introduction
 
-This is an easy-to-use shadow editor for quick entourage design and rendering.
+This is an easy-to-use shadow editor for quick entourage design and rendering. (Project is still in development, some features may not work)
+
+## For Devs
+
+Terrible code. You have been warned.
 
 ![Sample Image of The App](src/assets/images/BeautyDesigner.png)
 
