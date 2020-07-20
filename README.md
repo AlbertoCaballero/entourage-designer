@@ -4,7 +4,7 @@
 
 This is an easy-to-use shadow editor for quick entourage design and rendering.
 
-![Sample Image of The App](https://github.com/AlbertoCaballero/entourage-designer/tree/master/src/assets/images/BeautyDesigner.png)
+![Sample Image of The App](src/assets/images/BeautyDesigner.png)
 
 ## Further help
 
